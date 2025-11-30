@@ -1,0 +1,147 @@
+/* Reset & box-sizing */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html, body {
+    width: 100%;
+    overflow-x: hidden;
+    font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+/* NAVBAR */
+.seller-navbar {
+    width: 100%;
+    background: #ffffff;
+    border-bottom: 1px solid #e0e0e0;
+    padding: 20px 40px; /* lebih tinggi */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
+
+/* Kiri: logo + menu */
+.nav-left {
+    display: flex;
+    align-items: center;
+    gap: 28px; /* lebih lega */
+}
+
+.nav-logo {
+    font-family: "Montserrat", sans-serif;
+    font-weight: 800;
+    font-size: 26px; /* lebih besar */
+    color: #111;
+    text-decoration: none;
+}
+
+.nav-links {
+    display: flex;
+    gap: 20px;
+    list-style: none;
+}
+
+.nav-links a {
+    text-decoration: none;
+    font-family: "Montserrat", sans-serif;
+    font-size: 16px; /* lebih besar */
+    font-weight: 500;
+    color: #333;
+    transition: 0.2s;
+}
+
+.nav-links a:hover {
+    color: #007bff;
+}
+
+/* Kanan: search + profil */
+.nav-right {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.nav-search input {
+    padding: 10px 36px 10px 14px;
+    border-radius: 999px;
+    border: 1px solid #e0e0e0;
+    font-size: 15px;
+    width: 220px;
+    max-width: 100%;
+}
+
+.nav-profile {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: #ccc;
+}
+
+/* FOOTER */
+.footer {
+    background: #111; /* warna hitam */
+    color: #fff;
+    padding: 40px 20px;
+    font-size: 14px;
+}
+
+.footer .foot-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.footer .foot-inner div {
+    min-width: 200px;
+}
+
+.footer a {
+    color: #fff;
+    text-decoration: none;
+}
+
+.footer a:hover {
+    color: #007bff;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+    .seller-navbar {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 12px;
+        padding: 16px 16px;
+    }
+    .nav-left {
+        flex-wrap: wrap;
+        justify-content: space-between;
+        gap: 12px;
+    }
+    .nav-links {
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        gap: 12px;
+    }
+    .nav-right {
+        justify-content: flex-start;
+        gap: 12px;
+    }
+    .nav-search input {
+        width: 100%;
+    }
+    .footer .foot-inner {
+        flex-direction: column;
+        gap: 24px;
+        text-align: center;
+    }
+}
