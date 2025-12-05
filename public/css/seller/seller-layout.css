@@ -13,10 +13,13 @@ html, body {
 
 /* NAVBAR */
 .seller-navbar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 100%;
     background: #ffffff;
     border-bottom: 1px solid #e0e0e0;
-    padding: 20px 40px; /* lebih tinggi */
+    padding: 20px 40px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -26,23 +29,37 @@ html, body {
     box-shadow: 0 2px 6px rgba(0,0,0,0.05);
 }
 
+.nav-left, .nav-links, .nav-right {
+    flex: 1;
+    display: flex;
+    align-items: center;
+}
+
 /* Kiri: logo + menu */
 .nav-left {
     display: flex;
+    justify-content: flex-start;
     align-items: center;
-    gap: 28px; /* lebih lega */
+    gap: 20px;
 }
 
 .nav-logo {
     font-family: "Montserrat", sans-serif;
     font-weight: 800;
-    font-size: 26px; /* lebih besar */
-    color: #111;
+    font-size: 26px;
+    color: #0667d0; /* LOGO TETAP BIRU */
     text-decoration: none;
+}
+
+.logo-img {
+    height: 35px;  /* kecil & proporsional */
+    width: auto;
+    object-fit: contain;
 }
 
 .nav-links {
     display: flex;
+    justify-content: center !important;
     gap: 20px;
     list-style: none;
 }
@@ -50,25 +67,32 @@ html, body {
 .nav-links a {
     text-decoration: none;
     font-family: "Montserrat", sans-serif;
-    font-size: 16px; /* lebih besar */
+    font-size: 16px;
     font-weight: 500;
-    color: #333;
+    color: #000000; /* MENU NAVBAR JADI HITAM */
     transition: 0.2s;
 }
 
 .nav-links a:hover {
-    color: #007bff;
+    color: #0667d0; /* Hover biru biar konsisten */
 }
 
 /* Kanan: search + profil */
 .nav-right {
     display: flex;
+    justify-content: flex-end;
     align-items: center;
     gap: 16px;
 }
 
+.nav-search {
+    position: relative;
+}
+
+
 .nav-search input {
     padding: 10px 36px 10px 14px;
+    padding-right: 40px;
     border-radius: 999px;
     border: 1px solid #e0e0e0;
     font-size: 15px;
@@ -76,17 +100,20 @@ html, body {
     max-width: 100%;
 }
 
-.nav-profile {
-    width: 42px;
-    height: 42px;
-    border-radius: 50%;
-    background: #ccc;
+.nav-search .search-icon {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    height: 18px;
+    width: 18px;
+    opacity: 0.7;
 }
 
 /* FOOTER */
 .footer {
-    background: #111; /* warna hitam */
-    color: #fff;
+    background: #0667d0; /* FOOTER BIRU */
+    color: #ffffff;       /* TEKS PUTIH */
     padding: 40px 20px;
     font-size: 14px;
 }
@@ -106,12 +133,12 @@ html, body {
 }
 
 .footer a {
-    color: #fff;
+    color: #ffffff; /* LINK PUTIH */
     text-decoration: none;
 }
 
 .footer a:hover {
-    color: #007bff;
+    color: #dfefff; /* PUTIH LEBIH MUDA WAKTU HOVER */
 }
 
 /* Responsive */
@@ -131,6 +158,7 @@ html, body {
         flex-wrap: wrap;
         justify-content: flex-start;
         gap: 12px;
+        list-style: none;
     }
     .nav-right {
         justify-content: flex-start;
