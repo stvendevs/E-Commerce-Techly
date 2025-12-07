@@ -22,11 +22,11 @@
         </div>
 
         <ul class="nav-links">
-            <li><a href="#" class="nav-link">Store Registration</a></li>
-            <li><a href="#" class="nav-link">Orders</a></li>
-            <li><a href="#" class="nav-link">Store Balance</a></li>
-            <li><a href="#" class="nav-link">Withdrawals</a></li>
-            <li><a href="#" class="nav-link">Store Management</a></li>
+            <li><a href="#" class="nav-link">Pendaftaran Toko</a></li>
+            <li><a href="#" class="nav-link">Pesanan</a></li>
+            <li><a href="#" class="nav-link">Saldo Toko</a></li>
+            <li><a href="#" class="nav-link">Penarikan Saldo</a></li>
+            <li><a href="#" class="nav-link">Manajemen Toko</a></li>
         </ul>
 
         <div class="nav-right">

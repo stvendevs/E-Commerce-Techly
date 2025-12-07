@@ -74,6 +74,44 @@ html, body {
     color: #333;
 }
 
+.auth-footer {
+    display: flex;
+    flex-direction: column; /* susun vertical */
+    align-items: flex-start; /* kiri */
+    gap: 5px; /* jarak antar baris */
+    font-size: 0.75rem;
+    margin-top: 2px;
+}
+
+.register-row {
+    display: flex;
+    gap: 4px; /* jarak antara teks dan link */
+    align-items: center; /* vertikal sejajar */
+}
+
+
+.auth-footer a {
+    color: #3b82f6; /* blue-600 */
+    text-decoration: underline;
+}
+
+.auth-footer a:hover {
+    color: #1e40af; /* hover: darker blue */
+}
+
+.auth-footer {
+    font-size: 0.85rem;
+    text-align: left;
+}
+.auth-footer a {
+    color: #0667d0;
+    text-decoration: underline;
+}
+.auth-footer a:hover {
+    color: #1e40af;
+}
+
+
 /* Responsive: stack */
 @media (max-width: 768px) {
     .auth-page {

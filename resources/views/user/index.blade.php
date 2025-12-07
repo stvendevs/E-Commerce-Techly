@@ -24,7 +24,7 @@
                         <span class="cart-icon">🛒</span> Keranjang
                         <span class="cart-count">(0)</span>
                     </a>
-                    <a href="login.html" class="nav-link nav-login">
+                    <a href="{{ route('login') }}" class="nav-link nav-login">
                         <span class="login-icon">👤</span> Login
                     </a>
                 </nav>

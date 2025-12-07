@@ -152,6 +152,48 @@ html, body {
     color: #dfefff;
 }
 
+/* NAV LINK ANIMATION */
+.nav-links a {
+    position: relative;
+    overflow: hidden;
+    color: #000 !important; /* tetap hitam */
+    transition: color 0.2s ease;
+}
+
+/* garis animasi */
+.nav-links a::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    width: 0%;
+    height: 2px;
+    background-color: #0667d0;
+    transition: 0.25s ease-in-out;
+    transform: translateX(-50%);
+}
+
+/* hover animasi — hanya garis */
+.nav-links a:hover::after {
+    width: 70%;
+}
+
+/* hilangkan perubahan warna text */
+.nav-links a:hover {
+    color: #000 !important;
+}
+
+/* ACTIVE link */
+.nav-links a.active::after {
+    width: 70%;
+}
+
+.nav-links a.active {
+    color: #000 !important; /* tetap hitam */
+    font-weight: 600;
+}
+
+
 /* Responsive */
 @media (max-width: 900px) {
     .seller-navbar {

@@ -1,6 +1,5 @@
 <x-guest-layout title="Login">
     <x-auth-session-status class="mb-4" :status="session('status')" />
-
     <form method="POST" action="{{ route('login') }}" class="flex flex-col gap-4 w-full max-w-sm mx-auto">
         @csrf
 
@@ -45,13 +44,16 @@
             </x-primary-button>
         </div>
 
-        <!-- Forgot Password -->
-        @if (Route::has('password.request'))
-            <div class="mt-3 text-center">
-                <a class="text-sm text-gray-600 hover:text-gray-900 underline" href="{{ route('password.request') }}">
-                    {{ __('Forgot your password?') }}
-                </a>
+      <!-- Forgot Password + Register -->
+        <div class="auth-footer">
+            <a href="{{ route('password.request') }}">
+                {{ __('Forgot your password?') }}
+            </a>
+
+            <div class="register-row">
+                <span>{{ __("Don't have an account?") }}</span>
+                <a href="{{ route('register') }}">{{ __('Register') }}</a>
             </div>
-        @endif
+        </div>
     </form>
 </x-guest-layout>
