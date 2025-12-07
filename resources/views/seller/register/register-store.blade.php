@@ -7,6 +7,7 @@
 @endsection
 
 @section('content')
+
 <div class="register-wrapper">
     <div class="register-left">
         <h2 class="store-title">Registrasi Toko</h2>

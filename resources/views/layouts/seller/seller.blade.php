@@ -37,7 +37,6 @@
             </div>
         </div>
     </nav>
-
     {{-- Konten Halaman --}}
     <main class="seller-content">
         @yield('content')
@@ -63,7 +62,5 @@
             </div>
         </div>
     </footer>
-
-
 </body>
 </html>

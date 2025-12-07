@@ -17,15 +17,16 @@
                     <img src="{{ asset('uploads/weblogo.png') }}" alt="Techly" class="logo-img" />
                 </a>
                 <nav class="nav-menu">
-                    <a href="#products" class="nav-link">Product</a>
-                    <a href="#categories" class="nav-link">Categories</a>
-                    <a href="#about" class="nav-link">About</a>
+                    <a href="#products" class="nav-link">Produk</a>
+                    <a href="#categories" class="nav-link">Kategori</a>
+                    <a href="#about" class="nav-link">Tentang</a>
+
                     <a href="checkout.html" class="nav-link cart-link">
                         <span class="cart-icon">🛒</span> Keranjang
                         <span class="cart-count">(0)</span>
                     </a>
-                    <a href="{{ route('login') }}" class="nav-link nav-login">
-                        <span class="login-icon">👤</span> Login
+                    <a href="login.html" class="nav-link nav-login">
+                        <span class="login-icon"></span>Login
                     </a>
                 </nav>
             </div>
@@ -38,11 +39,11 @@
         <div class="container hero-content">
             <div class="hero-text">
                 <h1 class="hero-title">
-                    Upgrade Gadgetmu. <br />
-                    <span class="gradient-text">Hidup Lebih Smart.</span>
+                    Upgrade Gadgetmu<br />
+                    <span class="gradient-text">Hidup Lebih Smart!</span>
                 </h1>
                 <p class="hero-subtitle">
-                    Temukan inovasi elektronik terbaru dengan teknologi mutakhir, harga kompetitif, dan garansi resmi.
+                  Dapatkan inovasi elektronik terbaru dengan teknologi mutakhir, harga kompetitif, dan garansi resmi, hanya di sini.
                 </p>
                 <div class="hero-buttons">
                     <a href="#products" class="btn btn-primary">🔍 Lihat Produk</a>
@@ -143,131 +144,87 @@
     </section>
 
     <!-- CATEGORIES SECTION -->
-    <section id="categories" class="category-section">
-      <div class="container">
-        <div class="section-header">
-          <h2>Telusuri Kategori</h2>
-          <p class="section-subtitle">Temukan produk sesuai kebutuhan Anda</p>
-        </div>
+   <section id="categories" class="category-section">
+  <div class="container">
 
-        <!-- LAYOUT: kategori (kiri) + controls (kanan) -->
-        <div class="categories-layout">
-          <!-- KIRI: kartu kategori -->
-          <div class="category-grid">
-            <div class="category-card" data-category="Smartphone">
-              <div class="category-icon">📱</div>
-              <h3>Smartphone</h3>
-              <p>Ponsel pintar terbaru</p>
-            </div>
-            <div class="category-card" data-category="Laptop">
-              <div class="category-icon">💻</div>
-              <h3>Laptop</h3>
-              <p>Komputer portable bertenaga</p>
-            </div>
-            <div class="category-card" data-category="Audio">
-              <div class="category-icon">🎧</div>
-              <h3>Audio</h3>
-              <p>Headphone & speaker premium</p>
-            </div>
-            <div class="category-card" data-category="Aksesoris">
-              <div class="category-icon">🔌</div>
-              <h3>Aksesoris</h3>
-              <p>Perlengkapan & aksesori gadget</p>
-            </div>
-          </div>
+    <!-- SECTION HEADER -->
+    <div class="section-header">
+      <h2>Telusuri Kategori</h2>
+      <p class="section-subtitle">Temukan produk sesuai kebutuhan Anda</p>
+    </div>
 
-          <!-- KANAN: controls (search + filter harga) -->
-          <aside class="category-controls" aria-label="Kontrol Kategori">
-            <div class="search-input-wrapper small">
-              <svg
-                class="search-icon"
-                viewBox="0 0 24 24"
-                aria-hidden="true"
-                focusable="false"
-              >
-                <path
-                  d="M21 21l-4.35-4.35"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  fill="none"
-                />
-                <circle
-                  cx="11"
-                  cy="11"
-                  r="6"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  fill="none"
-                />
-              </svg>
-              <input
-                id="categorySearch"
-                class="input-search input-search--small"
-                type="search"
-                placeholder="Cari kategori atau produk..."
-                aria-label="Cari kategori atau produk"
-              />
-            </div>
+    <!-- TOP FILTER BAR -->
+    <div class="category-top-bar">
 
-            <label class="control-label">Filter Kategori</label>
-            <select id="filterCategoryRight" class="select-sort">
-              <option value="">Semua Kategori</option>
-              <option value="Smartphone">Smartphone</option>
-              <option value="Laptop">Laptop</option>
-              <option value="Audio">Audio</option>
-              <option value="Aksesoris">Aksesoris</option>
-            </select>
-
-            <label class="control-label" style="margin-top: 12px"
-              >Filter Harga</label
-            >
-            <div class="filter-price-vertical">
-              <div class="price-row">
-                <input
-                  id="minPrice"
-                  type="number"
-                  placeholder="Min: Rp"
-                  class="price-input"
-                  min="0"
-                  step="1000"
-                  inputmode="numeric"
-                  aria-label="Harga minimum"
-                />
-                <small class="price-note">Min</small>
-              </div>
-
-              <div class="price-row">
-                <input
-                  id="maxPrice"
-                  type="number"
-                  placeholder="Max: Rp"
-                  class="price-input"
-                  min="0"
-                  step="1000"
-                  inputmode="numeric"
-                  aria-label="Harga maksimum"
-                />
-                <small class="price-note">Max</small>
-              </div>
-
-              <button
-                id="filterPriceBtn"
-                class="btn btn-primary btn-block"
-                style="margin-top: 10px"
-              >
-                🔍 Terapkan
-              </button>
-            </div>
-          </aside>
-        </div>
-
-        <div id="category-products" class="product-grid"></div>
+      <!-- SEARCH -->
+      <div class="search-input-wrapper">
+        <svg class="search-icon" viewBox="0 0 24 24">
+          <path d="M21 21l-4.35-4.35" stroke="currentColor" stroke-width="2" fill="none"/>
+          <circle cx="11" cy="11" r="6" stroke="currentColor" stroke-width="2" fill="none"/>
+        </svg>
+        <input id="categorySearch" class="input-search" type="search"
+          placeholder="Cari kategori atau produk..." aria-label="Cari kategori atau produk">
       </div>
-    </section>
+
+      <!-- FILTER CATEGORY -->
+      <select id="filterCategoryRight" class="select-sort">
+        <option value="">Semua Kategori</option>
+        <option value="Smartphone">Smartphone</option>
+        <option value="Laptop">Laptop</option>
+        <option value="Audio">Audio</option>
+        <option value="Aksesoris">Aksesoris</option>
+      </select>
+
+      <!-- PRICE FILTER -->
+      <div class="price-filter-group">
+        <input id="minPrice" type="number" placeholder="Min: Rp" class="price-input" min="0">
+        <span class="separator">-</span>
+        <input id="maxPrice" type="number" placeholder="Max: Rp" class="price-input" min="0">
+        <button id="filterPriceBtn" class="btn btn-primary">Terapkan</button>
+      </div>
+
+    </div>
+
+    <!-- GRID KATEGORI BARU -->
+    <div class="category-grid">
+
+      <div class="category-card" data-category="Smartphone">
+        <div class="category-img">
+          <img src="{{ asset('uploads/hp.svg') }}" alt="Smartphone">
+        </div>
+        <h3>Smartphone</h3>
+        <p>Ponsel pintar terbaru</p>
+      </div>
+
+      <div class="category-card" data-category="Laptop">
+        <div class="category-img">
+          <img src="{{ asset('uploads/laptop.svg') }}" alt="Laptop">
+        </div>
+        <h3>Laptop</h3>
+        <p>Komputer portable bertenaga</p>
+      </div>
+
+      <div class="category-card" data-category="Audio">
+        <div class="category-img">
+          <img src="{{ asset('uploads/audio.svg') }}" alt="Audio">
+        </div>
+        <h3>Audio</h3>
+        <p>Headphone & speaker premium</p>
+      </div>
+
+      <div class="category-card" data-category="Aksesoris">
+        <div class="category-img">
+          <img src="{{ asset('uploads/aksesoris.svg') }}" alt="Aksesoris">
+        </div>
+        <h3>Aksesoris</h3>
+        <p>Perlengkapan & aksesori gadget</p>
+      </div>
+
+    </div>
+
+    <div id="category-products" class="product-grid"></div>
+  </div>
+</section>
 
     <!-- ABOUT SECTION -->
     <section id="about" class="about-section">
@@ -303,57 +260,76 @@
                 </div>
 
                 <div class="about-image" aria-hidden="true">
-                    <div class="about-illustration">📦</div>
+                    <div class="about-illustration">
+                        <img src="{{ asset('uploads/weblogo.png') }}" alt="Ilustrasi Tentang Techly" />
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- IMPROVED FOOTER -->
-    <footer class="main-footer simple-footer" role="contentinfo">
-        <div class="container footer-inner">
-            <div class="footer-brand">
-                <a href="index.html" class="footer-logo" aria-label="Techly — Beranda">
-                    <span class="footer-logo-icon">⚡</span>
-                    <span class="footer-logo-text">Techly</span>
-                </a>
-                <p class="footer-desc">
-                    Gadget & elektronik berkualitas. Pengiriman cepat, garansi resmi.
-                </p>
-                <div class="social-links" aria-hidden="true">
-                    <a href="#" class="social-icon" aria-label="Facebook">f</a>
-                    <a href="#" class="social-icon" aria-label="Instagram">📷</a>
-                    <a href="#" class="social-icon" aria-label="Twitter">𝕏</a>
-                </div>
+    <!-- SIMPLE & USEFUL FOOTER -->
+<footer class="footer">
+    <div class="footer-container">
+
+        <!-- BRAND -->
+        <div class="footer-col">
+            <img src="{{ asset('uploads/logotbg.svg') }}" class="footer-logo" alt="Techly">
+            <p class="footer-desc">
+                Techly — Gadget & Elektronik terpercaya. Pengiriman cepat dan bergaransi.
+            </p>
+
+            <div class="footer-social">
+                <a href="#"><img src="{{ asset('uploads/logofb.svg') }}" class="social-icon-img" alt="Facebook"></a>
+                <a href="#"><img src="{{ asset('uploads/logoig.svg') }}" class="social-icon-img" alt="Instagram"></a>
+                <a href="#"><img src="{{ asset('uploads/logowa.svg') }}" class="social-icon-img" alt="Whatsapp"></a>
+                <a href="#"><img src="{{ asset('uploads/logolinkedin.svg') }}" class="social-icon-img" alt="LinkedIn"></a>
             </div>
-
-            <nav class="footer-nav" aria-label="Footer navigation">
-                <ul>
-                    <li><a href="#products">Produk</a></li>
-                    <li><a href="#categories">Kategori</a></li>
-                    <li><a href="#about">Tentang</a></li>
-                    <li><a href="checkout.html">Keranjang</a></li>
-                </ul>
-            </nav>
-
-            <div class="footer-contact">
-                <a href="mailto:hello@techly.id" class="contact-email">hello@techly.id</a
-          >
-          <div class="footer-badges">
-            <span class="badge small">🔒 Aman</span>
-            <span class="badge small">⭐ Garansi</span>
-          </div>
         </div>
-      </div>
 
-      <div class="footer-bottom">
-        <div class="container">
-          <p>
-            © <span id="footerYear">2025</span> Techly. Semua hak dilindungi.
-          </p>
+        <!-- NAVIGASI -->
+        <div class="footer-col">
+            <h4>Navigasi</h4>
+            <ul>
+                <li><a href="#">Tentang Kami</a></li>
+                <li><a href="#">FAQ</a></li>
+            </ul>
         </div>
-      </div>
-    </footer>
+
+        <!-- KEBIJAKAN -->
+        <div class="footer-col">
+            <h4>Kebijakan</h4>
+            <ul>
+                <li><a href="#">Kebijakan Privasi</a></li>
+                <li><a href="#">Syarat & Ketentuan</a></li>
+                <li><a href="#">Keamanan Pengguna</a></li>
+            </ul>
+        </div>
+
+        <!-- KONTAK -->
+        <div class="footer-col">
+            <h4>Kontak</h4>
+            <p>Email: <a href="mailto:admintechly@techly.id">admintechly@techly.id</a></p>
+            <p>Telp: +62 812-3456-7890</p>
+            <p>Alamat: Malang, Jawa Timur</p>
+        </div>
+
+        <!-- NEWSLETTER -->
+        <div class="footer-col">
+            <h4>Newsletter</h4>
+            <p>Dapatkan promo & update terbaru.</p>
+
+            <form class="newsletter-form">
+                <input type="email" placeholder="Email kamu..." required>
+                <button type="submit">Daftar</button>
+            </form>
+        </div>
+
+    </div>
+
+    <div class="footer-bottom">
+        © 2025 Techly. Semua hak dilindungi.
+    </div>
+</footer>
 
     <script>
       // set dynamic year
