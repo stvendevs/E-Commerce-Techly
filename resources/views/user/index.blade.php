@@ -46,8 +46,8 @@
                   Dapatkan inovasi elektronik terbaru dengan teknologi mutakhir, harga kompetitif, dan garansi resmi, hanya di sini.
                 </p>
                 <div class="hero-buttons">
-                    <a href="#products" class="btn btn-primary">🔍 Lihat Produk</a>
-                    <a href="#categories" class="btn btn-secondary">📂 Jelajahi Kategori</a
+                    <a href="#products" class="btn btn-primary">Lihat Produk</a>
+                    <a href="#categories" class="btn btn-secondary">Jelajahi Kategori</a
             >
           </div>
         </div>
@@ -111,7 +111,6 @@
           </div>
           <div class="toolbar-right">
             <!-- FILTER HARGA (DIPINDAHKAN KE BAWAH KATEGORI) -->
-            <!-- <div class="filter-price"> ... </div> -->
             <!-- FILTER KATEGORI -->
             <select id="filterCategory" class="select-sort">
               <option value="">Semua Kategori</option>
@@ -123,7 +122,7 @@
 
             <!-- SORT -->
             <select id="sortSelect" class="select-sort">
-              <option value="">Urutkan: Terpopuler</option>
+              <option value="">Terpopuler</option>
               <option value="price-asc">Harga: Rendah → Tinggi</option>
               <option value="price-desc">Harga: Tinggi → Rendah</option>
               <option value="rating">Rating</option>
@@ -142,6 +141,68 @@
         <div id="all-products" class="product-grid"></div>
       </div>
     </section>
+
+ <div class="best-seller-container">
+            <h3>Produk Paling Laris di Techly</h3>
+            <div class="best-seller-grid">
+
+                <div class="bs-card">
+                    <div class="bs-image">
+                        <img src="{{ asset('uploads/produksatu.svg') }}" alt="Smartphone Best Seller">
+                    </div>
+                    <div class="bs-content">
+                        <span class="bs-category">Smartphone</span>
+                        <p class="bs-name">Iphone 16 Pro Max</p>
+                        <p class="bs-price">Rp 21.499.000 <s class="bs-disc">Rp 23.500.000</s></p>
+                        <p class="bs-rating">⭐ 4.9 | 120 Terjual</p>
+                        <a href="#" class="btn btn-add-cart btn-detail-bs">Lihat Detail</a>
+                    </div>
+                </div>
+
+                <div class="bs-card">
+                    <div class="bs-image">
+                        <img src="{{ asset('uploads/produkdua.svg') }}" alt="Laptop Best Seller">
+                    </div>
+                    <div class="bs-content">
+                        <span class="bs-category">Laptop</span>
+                        <p class="bs-name">Macbook Air M4 13inch</p>
+                        <p class="bs-price">Rp 16.599.000 <s class="bs-disc">Rp 18.000.000</s></p>
+                        <p class="bs-rating">⭐ 4.8 | 99 Terjual</p>
+                        <a href="#" class="btn btn-add-cart btn-detail-bs">Lihat Detail</a>
+                    </div>
+                </div>
+
+                <div class="bs-card">
+                    <div class="bs-image">
+                        <img src="{{ asset('uploads/produktiga.svg') }}" alt="Audio Best Seller">
+                    </div>
+                    <div class="bs-content">
+                        <span class="bs-category">Audio</span>
+                        <p class="bs-name">Airpods M4</p>
+                        <p class="bs-price">Rp 1.975.000 <s class="bs-disc">Rp 2.999.000</s></p>
+                        <p class="bs-rating">⭐ 4.7 | 155 Terjual</p>
+                        <a href="#" class="btn btn-add-cart btn-detail-bs">Lihat Detail</a>
+                    </div>
+                </div>
+
+                <div class="bs-card">
+                    <div class="bs-image">
+                        <img src="{{ asset('uploads/produkempat.svg') }}" alt="Aksesoris Best Seller">
+                    </div>
+                    <div class="bs-content">
+                        <span class="bs-category">Aksesoris</span>
+                        <p class="bs-name">Grotic Powebank</p>
+                        <p class="bs-price">Rp 249.000 <s class="bs-disc">Rp 115.500</s></p>
+                        <p class="bs-rating">⭐ 4.6 | 210 Terjual</p>
+                        <a href="#" class="btn btn-add-cart btn-detail-bs">Lihat Detail</a>
+                    </div>
+                </div>
+
+            </div>
+            <div class="best-seller-footer">
+                <a href="#products" class="btn btn-primary btn-view-more">Lihat Produk Lainnya </a>
+            </div>
+        </div>
 
     <!-- CATEGORIES SECTION -->
    <section id="categories" class="category-section">
@@ -180,7 +241,7 @@
         <input id="minPrice" type="number" placeholder="Min: Rp" class="price-input" min="0">
         <span class="separator">-</span>
         <input id="maxPrice" type="number" placeholder="Max: Rp" class="price-input" min="0">
-        <button id="filterPriceBtn" class="btn btn-primary">Terapkan</button>
+        <button id="filterPriceBtn" class="btn btn-primary">Lihat Hasil </button>
       </div>
 
     </div>

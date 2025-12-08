@@ -10,9 +10,9 @@ Route::get('/', function () {
     return view('user.index');
 });
 
+//produk detail
 Route::get('/produk/{slug}', [ProductController::class, 'detail'])
 ->name('product.detail');
-
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -39,7 +39,7 @@ Route::middleware(['auth'])
 
     Route::post('/register-store', [SellerStoreController::class, 'store'])
         ->name('store.store');
-
+     
 
 
 });
