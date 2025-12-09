@@ -3,28 +3,40 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Seller\SellerStoreController;
 use App\Http\Controllers\Seller\SellerDashboardController;
-use App\Http\Controllers\ProductController;
+use App\Http\Controllers\Product\ProductController;
+use App\Http\Controllers\User\HomepageController;
+use App\Models\Product;
+
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('user.index');
-});
+// HOMEPAGE
+Route::get('/', [HomepageController::class, 'indexGuest'])->name('home');
+Route::get('/dashboard', [HomepageController::class, 'indexAuth'])->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/category/{slug}', [HomepageController::class, 'getByCategory'])->name('category.products');
 
+// PROFILE
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-    Route::get('/produk/{slug}', [ProductController::class, 'detail'])->name('product.detail');
 });
 
-Route::middleware(['auth'])
-->prefix('seller')
-->name('seller.')
-->group(function () {
+// PRODUCT
+// Get Products
+Route::get('/products', [ProductController::class, 'index']);
+Route::get('/products/category/{slug}', [ProductController::class, 'byCategory']);
+Route::get('/products/{slug}', [ProductController::class, 'show']);
+
+
+
+
+//produk detail
+Route::get('/produk/{slug}', [ProductController::class, 'detail'])
+->name('product.detail');
+
+// Seller
+Route::middleware(['auth'])->prefix('seller')->name('seller.')->group(function () {
 
     // Dashboard Seller
     Route::get('/dashboard', [SellerDashboardController::class, 'index'])
@@ -36,9 +48,6 @@ Route::middleware(['auth'])
 
     Route::post('/register-store', [SellerStoreController::class, 'store'])
         ->name('store.store');
-
-
-
 });
 
 require __DIR__.'/auth.php';

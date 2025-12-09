@@ -158,34 +158,135 @@ html, body {
 }
 
 /* FOOTER */
+/* ============ FOOTER FINAL ============ */
 .footer {
-    background: #0667d0; /* FOOTER BIRU */
-    color: #ffffff;       /* TEKS PUTIH */
-    padding: 40px 20px;
-    font-size: 14px;
+    background: #222A3C;
+    color: #e8e8e8;
+    padding: 40px 20px 20px;
+    font-family: "Poppins", sans-serif;
+    margin-top: 40px;
 }
 
-.footer .foot-inner {
+.footer-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 10px;
     max-width: 1200px;
-    margin: 0 auto;
-    display: flex;
-    gap: 24px;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    align-items: flex-start;
+    margin: auto;
 }
 
-.footer .foot-inner div {
-    min-width: 200px;
+/* Brand */
+.footer-logo {
+    width: 140px;
+    margin-bottom: 10px;
 }
 
-.footer a {
-    color: #ffffff; /* LINK PUTIH */
+.footer-desc {
+    margin: 10px 0 15px;
+    font-size: 14px;
+    color: #cfcfcf;
+    line-height: 1.5;
+}
+
+/* Social icons */
+.footer-social a {
+    display: inline-block;
+    margin-right: 10px;
+}
+
+.social-icon-img {
+    width: 28px;
+    height: 28px;
+    object-fit: contain;
+    transition: 0.3s;
+    filter: invert(30%) sepia(90%) saturate(2000%) hue-rotate(180deg) brightness(100%);
+}
+
+.social-icon-img:hover {
+    transform: scale(1.1);
+    filter: brightness(1.2);
+}
+
+/* Title */
+.footer-col h4 {
+    margin-bottom: 10px;
+    font-size: 16px;
+    font-weight: 600;
+    color: #fff;
+}
+
+/* Lists */
+.footer-col ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.footer-col ul li {
+    margin: 6px 0;
+}
+
+.footer-col ul li a {
+    text-decoration: none;
+    color: #cdd3dd;
+    transition: 0.3s;
+}
+
+.footer-col ul li a:hover {
+    color: #fff;
+}
+
+/* Contact text */
+.footer-col p {
+    font-size: 14px;
+    color: #cdd3dd;
+    margin: 6px 0;
+}
+
+.footer-col p a {
+    color: #cdd3dd;
     text-decoration: none;
 }
 
-.footer a:hover {
-    color: #dfefff; /* PUTIH LEBIH MUDA WAKTU HOVER */
+.footer-col p a:hover {
+    color: #fff;
+}
+
+/* Newsletter */
+.newsletter-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.newsletter-form input {
+    padding: 10px;
+    border-radius: 6px;
+    border: none;
+    outline: none;
+}
+
+.newsletter-form button {
+    padding: 10px;
+    border: none;
+    border-radius: 6px;
+    background: #00c8ff;
+    color: #000;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.newsletter-form button:hover {
+    background: #00a3d1;
+}
+
+/* Bottom */
+.footer-bottom {
+    text-align: center;
+    margin-top: 25px;
+    color: #cdd3dd;
+    font-size: 13px;
 }
 
 /* Responsive */

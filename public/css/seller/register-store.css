@@ -85,21 +85,24 @@
     display: block;
     width: 100%;
     padding: 14px 0;
-    background: #111;
+    background: #0d6efd; /* biru modern */
     color: white;
     font-weight: 700;
-    border-radius: 50px; /* tombol lebih modern */
+    border-radius: 50px;
     border: none;
     text-align: center;
     font-size: 16px;
     cursor: pointer;
-    transition: 0.2s;
+    transition: background 0.3s ease, transform 0.2s ease;
     margin-top: 12px;
 }
 
+/* Hover elegan */
 .btn-submit:hover {
-    background: #007bff;
+    background: #0b5ed7; /* biru lebih gelap (sesuai gaya tombol footer) */
+    transform: translateY(-2px); /* sedikit naik biar terasa "klikable" */
 }
+
 
 /* Responsive */
 @media (max-width: 700px) {
