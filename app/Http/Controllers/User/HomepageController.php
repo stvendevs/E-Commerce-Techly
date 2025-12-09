@@ -9,9 +9,13 @@ use App\Models\ProductCategory;
 
 class HomepageController extends Controller
 {
-    // ============================================
-    // Fungsi internal untuk ambil semua produk
-    // ============================================
+    public function allProducts(Request $request)
+    {
+        $products = $this->fetchProducts($request);
+
+        return response()->json($products);
+    }
+
     private function fetchProducts(Request $request)
     {
         $query = Product::with([
@@ -19,15 +23,16 @@ class HomepageController extends Controller
             'productCategory',
             'productImages' => function ($q) {
                 $q->where('is_thumbnail', true);
-            }
+            },
         ]);
 
         // Search
         if ($request->search) {
-            $query->where('product_name', 'like', '%' . $request->search . '%');
+            // DULU: product_name -> ini nggak ada di tabel
+            $query->where('name', 'like', '%' . $request->search . '%');
         }
 
-        // Filter kategori
+        // Filter kategori (by slug)
         if ($request->category) {
             $query->whereHas('productCategory', function ($q) use ($request) {
                 $q->where('slug', $request->category);
@@ -51,7 +56,7 @@ class HomepageController extends Controller
     // ============================================
     public function indexGuest(Request $request)
     {
-        $products   = $this->fetchProducts($request);
+        $products = $this->fetchProducts($request);
         $categories = ProductCategory::all();
 
         return view('user.index', compact('products', 'categories'));
@@ -62,7 +67,7 @@ class HomepageController extends Controller
     // ============================================
     public function indexAuth(Request $request)
     {
-        $products   = $this->fetchProducts($request);
+        $products = $this->fetchProducts($request);
         $categories = ProductCategory::all();
 
         return view('user.index', compact('products', 'categories'));
@@ -75,14 +80,14 @@ class HomepageController extends Controller
     {
         $products = Product::with([
             'productCategory',
-            'productImages' => function($q){
+            'productImages' => function ($q) {
                 $q->where('is_thumbnail', true);
-            }
+            },
         ])
-        ->whereHas('productCategory', function($q) use ($slug) {
-            $q->where('slug', $slug);
-        })
-        ->get();
+            ->whereHas('productCategory', function ($q) use ($slug) {
+                $q->where('slug', $slug);
+            })
+            ->get();
 
         return response()->json($products);
     }

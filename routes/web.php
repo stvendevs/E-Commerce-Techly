@@ -14,6 +14,7 @@ Route::get('/', [HomepageController::class, 'indexGuest'])->name('home');
 Route::get('/dashboard', [HomepageController::class, 'indexAuth'])->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::get('/category/{slug}', [HomepageController::class, 'getByCategory'])->name('category.products');
+Route::get('/api/all-products', [HomepageController::class, 'allProducts'])->name('api.all-products');
 
 // PROFILE
 Route::middleware('auth')->group(function () {
