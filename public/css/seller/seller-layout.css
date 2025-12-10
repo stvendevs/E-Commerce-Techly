@@ -5,47 +5,71 @@
     padding: 0;
 }
 
-html, body {
+html,
+body {
     width: 100%;
     overflow-x: hidden;
-    font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto,
+        "Helvetica Neue", Arial, sans-serif;
 }
 
-/* NAVBAR */
+/* Variabel warna untuk gradient */
+:root {
+    --primary-color: #0667d0;
+    --secondary-color: #00c8ff;
+}
+
+/* ================= NAVBAR ================= */
+
 .seller-navbar {
     display: flex;
-    justify-content: space-between;
     align-items: center;
     width: 100%;
-    background: #ffffff;
-    border-bottom: 1px solid #e0e0e0;
-    padding: 20px 40px;
+
+    /* mirip navbar dashboard */
+    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+    border-bottom: 2px solid var(--primary-color);
+
+    /* lebih panjang / tebal dikit */
+    padding: 22px 60px;
+
+    /* logo kiri, menu kanan */
+    justify-content: space-between;
+
+    /* sticky di atas saat scroll */
     position: sticky;
     top: 0;
-    z-index: 100;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    z-index: 1000;
+    box-shadow: 0 2px 20px rgba(6, 103, 208, 0.1);
+}
+
+/* Logo kiri */
+.nav-left {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
 }
 
 .nav-logo {
     font-family: "Montserrat", sans-serif;
     font-weight: 800;
     font-size: 26px;
-    color: #0667d0; /* LOGO TETAP BIRU */
+    color: var(--primary-color);
     text-decoration: none;
 }
 
 .logo-img {
-    height: 35px;  /* kecil & proporsional */
+    height: 40px;
     width: auto;
     object-fit: contain;
 }
 
+/* MENU DI KANAN */
 .nav-links {
-    flex: 0 0 auto;       /* <— INI KUNCI UTAMANYA */
     display: flex;
-    justify-content: center;
     align-items: center;
-    gap: 12px;             /* biar lebih rapi */
+    justify-content: flex-end; /* menu ke kanan */
+    gap: 16px;
     list-style: none;
 }
 
@@ -54,77 +78,29 @@ html, body {
     justify-content: center;
 }
 
+/* Link style dasar */
 .nav-links a {
     display: flex;
-    flex-direction: column; /* Biar teks 2 baris rapi */
+    flex-direction: column;
     align-items: center;
     text-align: center;
-    padding: 4px 14px;       /* Ganti width fixed → padding */
+
+    padding: 4px 14px;
     white-space: normal;
     line-height: 1.2;
     text-decoration: none;
+
     font-family: "Montserrat", sans-serif;
     font-size: 15px;
     font-weight: 500;
     color: #000;
-    transition: 0.2s;
-}
 
-.nav-links a:hover {
-    color: #0667d0; /* Hover biru biar konsisten */
-}
-
-
-/* Kiri: logo + menu */
-.nav-left {
-    flex: 1;
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-}
-
-/* Kanan: search + profil */
-.nav-right {
-    flex: 1;
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-}
-
-.nav-search {
-    position: relative;
-}
-
-
-.nav-search input {
-    padding: 10px 36px 10px 14px;
-    padding-right: 40px;
-    border-radius: 999px;
-    border: 1px solid #e0e0e0;
-    font-size: 15px;
-    width: 220px;
-    max-width: 100%;
-}
-
-.nav-search .search-icon {
-    position: absolute;
-    right: 12px;
-    top: 50%;
-    transform: translateY(-50%);
-    height: 18px;
-    width: 18px;
-    opacity: 0.7;
-}
-
-/* NAV LINK ANIMATION */
-.nav-links a {
     position: relative;
     overflow: hidden;
-    color: #000 !important; /* tetap hitam */
     transition: color 0.2s ease;
 }
 
-/* garis animasi */
+/* underline gradasi ala dashboard */
 .nav-links a::after {
     content: "";
     position: absolute;
@@ -132,35 +108,37 @@ html, body {
     bottom: 0;
     width: 0%;
     height: 2px;
-    background-color: #0667d0;
-    transition: 0.25s ease-in-out;
     transform: translateX(-50%);
+    background: linear-gradient(
+        135deg,
+        var(--primary-color) 0%,
+        var(--secondary-color) 100%
+    );
+    transition: width 0.25s ease-in-out;
 }
 
-/* hover animasi — hanya garis */
+/* hover: hanya garis yang muncul, text tetap hitam */
 .nav-links a:hover::after {
-    width: 70%;
+    width: 100%;
 }
 
-/* hilangkan perubahan warna text */
 .nav-links a:hover {
-    color: #000 !important;
+    color: #000;
 }
 
 /* ACTIVE link */
-.nav-links a.active::after {
-    width: 70%;
-}
-
 .nav-links a.active {
-    color: #000 !important; /* tetap hitam */
     font-weight: 600;
 }
 
-/* FOOTER */
-/* ============ FOOTER FINAL ============ */
+.nav-links a.active::after {
+    width: 100%;
+}
+
+/* ================= FOOTER ================= */
+
 .footer {
-    background: #222A3C;
+    background: #222a3c;
     color: #e8e8e8;
     padding: 40px 20px 20px;
     font-family: "Poppins", sans-serif;
@@ -199,7 +177,8 @@ html, body {
     height: 28px;
     object-fit: contain;
     transition: 0.3s;
-    filter: invert(30%) sepia(90%) saturate(2000%) hue-rotate(180deg) brightness(100%);
+    filter: invert(30%) sepia(90%) saturate(2000%) hue-rotate(180deg)
+        brightness(100%);
 }
 
 .social-icon-img:hover {
@@ -289,7 +268,7 @@ html, body {
     font-size: 13px;
 }
 
-/* Responsive */
+/* ================= RESPONSIVE ================= */
 @media (max-width: 900px) {
     .seller-navbar {
         flex-direction: column;
@@ -297,24 +276,17 @@ html, body {
         gap: 12px;
         padding: 16px 16px;
     }
+
     .nav-left {
-        flex-wrap: wrap;
-        justify-content: space-between;
-        gap: 12px;
+        margin-bottom: 4px;
     }
+
     .nav-links {
+        justify-content: flex-start;
         flex-wrap: wrap;
-        justify-content: flex-start;
-        gap: 12px;
-        list-style: none;
-    }
-    .nav-right {
-        justify-content: flex-start;
         gap: 12px;
     }
-    .nav-search input {
-        width: 100%;
-    }
+
     .footer .foot-inner {
         flex-direction: column;
         gap: 24px;
