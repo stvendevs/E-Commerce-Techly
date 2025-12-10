@@ -73,7 +73,6 @@
         <div class="products-toolbar">
           <div class="toolbar-left">
             <div class="search-input-wrapper">
-              <!-- svg icon (left) -->
               <svg
                 class="search-icon"
                 viewBox="0 0 24 24"
@@ -110,7 +109,6 @@
             </div>
           </div>
           <div class="toolbar-right">
-            <!-- FILTER HARGA (DIPINDAHKAN KE BAWAH KATEGORI) -->
             <!-- FILTER KATEGORI -->
             <select id="filterCategory" class="select-sort">
               <option value="">Semua Kategori</option>
@@ -133,7 +131,6 @@
               <button class="view-btn active" data-view="grid" title="Grid">
                 ◻️
               </button>
-              <button class="view-btn" data-view="list" title="List">📋</button>
             </div>
           </div>
         </div>
@@ -144,7 +141,7 @@
 
  <div class="best-seller-container">
             <h3>Produk Paling Laris di Techly</h3>
-            <div class="best-seller-grid">
+            <div class="best-seller-grid" id="bestSellerGrid">
 
                 <div class="bs-card">
                     <div class="bs-image">
@@ -155,7 +152,7 @@
                         <p class="bs-name">Iphone 16 Pro Max</p>
                         <p class="bs-price">Rp 21.499.000 <s class="bs-disc">Rp 23.500.000</s></p>
                         <p class="bs-rating">⭐ 4.9 | 120 Terjual</p>
-                        <a href="#" class="btn btn-add-cart btn-detail-bs">Lihat Detail</a>
+                        <a href="{{ route('detail') }}#" class="btn btn-add-cart btn-detail-bs">Lihat Detail</a>
                     </div>
                 </div>
 
@@ -200,7 +197,7 @@
 
             </div>
             <div class="best-seller-footer">
-                <a href="#products" class="btn btn-primary btn-view-more">Lihat Produk Lainnya </a>
+              <a href="javascript:void(0)" id="viewMoreBtn" class="btn btn-primary btn-view-more">Lihat Produk Lainnya</a>
             </div>
         </div>
 
@@ -402,5 +399,73 @@
     </script>
     <!-- SCRIPT -->
     <script src="script.js"></script>
+    <script>
+    document.getElementById("viewMoreBtn").addEventListener("click", function() {
+
+    const grid = document.getElementById("bestSellerGrid");
+
+
+    // Tambahkan ke grid
+    grid.insertAdjacentHTML("beforeend", newProduct);
+});
+</script>
+<script src="script.js">
+</script>
+
+<script>
+    // Array produk tambahan ketika dia ngeklik "Lihat Produk Lainnya"
+    const newProducts = [
+        {
+            gambar: 'produkbaru.svg',
+            kategori: 'Aksesoris',
+            nama: 'Smartwatch Apple Series 6',
+            harga: 'Rp 4.899.000',
+            diskon: 'Rp 5.000.000',
+            rating: '⭐ 4.8 | 199 Terjual',
+            detailRoute: "{{ route('detail') }}"
+        },
+        {
+            gambar: 'produkbaru2.svg',
+            kategori: 'Audio',
+            nama: 'Speaker Nirkabel JBL',
+            harga: 'Rp 399.000',
+            diskon: 'Rp 500.000',
+            rating: '⭐ 4.7 | 133 Terjual',
+            detailRoute: "{{ route('detail') }}"
+        }
+    ];
+
+    let loadIndex = 0;
+    const loadLimit = 2; // maksimal 2 produk per klik
+
+    document.getElementById("viewMoreBtn").addEventListener("click", function() {
+        const grid = document.getElementById("bestSellerGrid");
+        const nextProducts = newProducts.slice(loadIndex, loadIndex + loadLimit);
+
+        nextProducts.forEach(p => {
+            const html = `
+                <div class="bs-card">
+                    <div class="bs-image">
+                        <img src="{{ asset('uploads/${p.gambar}') }}" alt="${p.nama}">
+                    </div>
+                    <div class="bs-content">
+                        <span class="bs-category">${p.kategori}</span>
+                        <p class="bs-name">${p.nama}</p>
+                        <p class="bs-price">${p.harga} <s class="bs-disc">${p.diskon}</s></p>
+                        <p class="bs-rating">${p.rating}</p>
+                        <a href="${p.detailRoute}" class="btn btn-add-cart btn-detail-bs">Lihat Detail</a>
+                    </div>
+                </div>
+            `;
+            grid.insertAdjacentHTML("beforeend", html);
+        });
+
+        loadIndex += nextProducts.length;
+
+        if (loadIndex >= newProducts.length) {
+            document.getElementById("viewMoreBtn").style.display = 'none';
+        }
+    });
+</script>
   </body>
 </html>

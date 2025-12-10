@@ -443,7 +443,6 @@ body {
 /* Tambahkan di bawah bagian PRODUCTS TOOLBAR */
 
 .best-seller-container {
-    /* MENGURANGI JARAK: margin-top dikurangi dari 40px ke 20px */
     margin: -20px 0 0;
     padding: 30px;
     background: var(--light-bg);

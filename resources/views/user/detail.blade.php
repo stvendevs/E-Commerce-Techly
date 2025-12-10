@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Product Detail | Techly</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="detail.css" />
+    <link rel="stylesheet" href="{{ asset('css/landingpage/detail.css') }}">
 </head>
 
 <body>
@@ -15,56 +15,60 @@
     <header class="main-header">
         <div class="container header-content">
             <a href="index.html" class="logo">
-                <img src="logo.png" alt="Techly" class="logo-img" />
+            <img src="{{ asset('uploads/weblogo.png') }}" alt="Techly" class="logo-img">
             </a>
 
             <nav class="nav-menu">
                 <ul>
-                    <li><a href="index.html">Beranda</a></li>
-                    <li><a href="#categories">Kategori</a></li>
-                    <li><a href="#products">Produk</a></li>
-                    <li><a href="checkout.html">Keranjang</a></li>
+                    <li><a href="{{ route('beranda') }}">Beranda</a></li>
+                    <li><a href="{{ route('kategori') }}">Kategori</a></li>
+                    <li><a href="{{ route('produk') }}">Produk</a></li>
+                    <li><a href="{{ route('keranjang') }}">Keranjang</a></li>
                 </ul>
             </nav>
         </div>
     </header>
+ 
 
     <!-- ================= PRODUCT DETAIL ================= -->
-    <!-- ================= DETAIL PRODUK ================= -->
     <section class="product-detail container">
 
         <div class="product-gallery">
             <div class="thumbnail-list">
-                <img src="thumb-1.jpg" alt="Thumbnail 1" class="thumb-img active" />
-                <img src="thumb-2.jpg" alt="Thumbnail 2" class="thumb-img" />
-                <img src="thumb-3.jpg" alt="Thumbnail 3" class="thumb-img" />
+                <div class="thumbnail-wrapper">
+                    <img src="{{ asset('uploads/fotoip161.svg') }}" alt="Thumbnail 0" class="thumb-img" />
+                    <img src="{{ asset('uploads/fotoip162.svg') }}" alt="Thumbnail 1" class="thumb-img" />
+                    <img src="{{ asset('uploads/fotoip163.svg') }}" alt="Thumbnail 2" class="thumb-img" />
+                </div>
             </div>
-
+            
             <div class="main-image-container">
-                <img src="product-sample.jpg" alt="Gambar Produk" class="main-img" />
+                <img src="{{ asset('uploads/produksatu.svg') }}" alt="gambar utama" class="produk-img">
             </div>
         </div>
-
+        
         <div class="product-info">
 
             <div class="store-header">
                 <span class="store-badge"></span>
-                <h3 class="store-name">EVERNEXT PROJECT</h3>
-                <button class="follow-btn">Follow</button>
+                <h3 class="store-name">EVERNEXT PHONE</h3>
+                <button class="follow-btn" id="follow-btn">IKUTI</button>
             </div>
             <div class="store-rating">
-                <span class="rating-star">⭐⭐</span>
+                <span class="rating-star">⭐⭐⭐⭐</span>
                 <span class="rating-value">4.9</span>
-                <span class="rating-count">(130,4 rb)</span>
+                <span class="rating-count">(120)</span>
             </div>
-            <h1 class="product-title">Smartphone X Pro</h1>
+            <h1 class="product-title">Iphone 16 Pro Max</h1>
             <p class="product-category">Kategori: <strong>Smartphone</strong></p>
 
             <p class="product-description">
-                Smartphone X Pro memberikan performa luar biasa dengan prosesor terbaru, layar super mulus, dan baterai tahan lama. Dirancang untuk kecepatan, gaya, dan keandalan sehari-hari.
+                iPhone 16 Pro Max mendefinisikan ulang batas performa dengan chip A18 Pro Bionic revolusioner, menghadirkan kecepatan rendering grafis yang belum pernah ada sebelumnya dan kemampuan AI terdepan di industri. 
+                Rasakan pengalaman visual yang imersif dan super mulus pada Layar ProMotion Adaptif 144Hz generasi terbaru, ditenagai oleh baterai Ultra-Tahan Lama yang siap menemani kreativitas dan produktivitas Anda sepanjang hari.
+                Dengan material Titanium Aerospace Grade yang diperkuat dan sistem kamera Quad-Lens Pro yang menghasilkan detail sinematik, iPhone 16 Pro Max bukan sekadar smartphone, melainkan ekstensi kekuatan, gaya, dan andalan mutlak Anda sehari-hari.
             </p>
 
-            <div class="product-price">Rp 4.299.000</div>
+            <div class="product-price">Rp 21.499.000</div>
 
 
 
@@ -77,7 +81,13 @@
                     <button type="button" id="plus-btn">+</button>
                 </div>
                 <button class="btn-add-cart" style="margin-top: 10px;">Tambahkan ke Keranjang</button>
+
+                <a href="{{ route('checkout', $product->id) }}" class="btn-checkout">
+    Beli Sekarang
+</a>
             </div>
+
+
 
             <!-- ================= Fitur Ulasan ================= -->
             <div class="product-reviews" style="margin-top: 30px;">
@@ -90,6 +100,23 @@
     </section>
 
     <script>
+        // ================= Tombol Ikuti =================
+    const followBtn = document.getElementById('follow-btn');
+
+    if (followBtn) {
+        followBtn.addEventListener('click', () => {
+        followBtn.classList.toggle('is-following');
+
+        // Ubah teks tombol berdasarkan keberadaan class
+        if (followBtn.classList.contains('is-following')) {
+            followBtn.textContent = 'MENGIKUTI';
+            alert('Anda sekarang mengikuti toko Evernext Phone!');
+        } else {
+            followBtn.textContent = 'IKUTI';
+            alert('Anda berhenti mengikuti toko Evernext Phone.');
+        }
+    });
+}
         // ================= Quantity Add to Cart =================
         const quantityInput = document.getElementById('quantity');
         const plusBtn = document.getElementById('plus-btn');
@@ -128,6 +155,42 @@
             reviewsList.appendChild(reviewEl);
             reviewInput.value = '';
         });
+        
+        const thumbnaillist = document.querySelector('.thumbnail-list');
+        const leftArrow = document.querySelector('.left-arrow');
+        const rightArrow = document.querySelector('.right-arrow');
+        const scrollAmount = 100;
+
+        if (thumbnailList && rightArrow && leftArrow) {
+        rightArrow.addEventListener('click', () => {
+            thumbnailList.scrollBy({
+                left: scrollAmount,
+                behavior: 'smooth'
+            });
+        });
+
+        leftArrow.addEventListener('click', () => {
+            thumbnailList.scrollBy({
+                left: -scrollAmount,
+                behavior: 'smooth'
+            });
+        });
+    }
+
+
+    // ================= Main Image Switching =================
+    const mainImage = document.querySelector('.produk-img');
+    const thumbnails = document.querySelectorAll('.thumb-img');
+
+    if (mainImage && thumbnails.length > 0) {
+        thumbnails.forEach(thumb => {
+            thumb.addEventListener('click', () => {
+                thumbnails.forEach(t => t.classList.remove('active'));
+                thumb.classList.add('active');
+                mainImage.src = thumb.src;
+            });
+        });
+    } 
     </script>
 
 

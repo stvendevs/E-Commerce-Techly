@@ -137,36 +137,62 @@ body {
 /* ======== FOTO PRODUK (GALERI BARU) ======== */
 
 .product-gallery {
-    /* Set product-gallery sebagai grid untuk menampung thumbnail dan main image */
-    display: grid;
-    /* Kolom kiri untuk thumbnail (lebar tetap), kolom kanan untuk gambar utama */
-    grid-template-columns: 80px 1fr;
-    gap: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
 }
 
-.main-image-container img {
+.main-image-container {
     width: 100%;
+    height: 450px;
+    overflow: hidden;
     border-radius: var(--radius);
     background: #fff;
     border: 1px solid var(--border-color);
     box-shadow: 0 6px 24px rgba(0, 0, 0, 0.06);
-    /* Grid item ini menempati kolom kedua */
-    grid-column: 2 / 3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.main-image-container img {
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+    border: none;
+    box-shadow: none;
 }
 
 
 /* Style untuk Thumbnail List */
 
+.thumbnail-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    /* Hapus padding: 0 0px; jika ada, atau pastikan 0*/
+    padding: 0 0px;
+    /* TAMBAHKAN ATAU UBAH INI: */
+    justify-content: center;
+    /* PENTING: Untuk memusatkan list thumbnail di antara panah */
+}
+
 .thumbnail-list {
     display: flex;
-    flex-direction: column;
-    gap: 10px;
-    /* Grid item ini menempati kolom pertama */
-    grid-column: 1 / 2;
+    flex-direction: row;
+    gap: 5px;
+    overflow-x: auto;
+    padding: 10px 0;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    /* JANGAN GUNAKAN justify-content: center; di sini, 
+    karena dapat mengganggu scrolling */
 }
 
 .thumb-img {
-    width: 100%;
+    width: 80px;
     height: 80px;
     object-fit: cover;
     border-radius: 8px;
@@ -174,12 +200,31 @@ body {
     cursor: pointer;
     opacity: 0.7;
     transition: 0.2s;
+    flex-shrink: 0;
 }
 
 .thumb-img:hover,
 .thumb-img.active {
     border-color: var(--primary);
     opacity: 1;
+}
+
+.nav-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: #fff;
+    border: none;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: background 0.2s;
 }
 
 
@@ -268,49 +313,117 @@ body {
 }
 
 
-/* ======== QUANTITY (Add to Cart) ======== */
-
-
 /* ======== FOTO PRODUK (GALERI BARU) ======== */
 
 .product-gallery {
     /* Set product-gallery sebagai grid untuk menampung thumbnail dan main image */
-    display: grid;
+    display: flex;
     /* Kolom kiri untuk thumbnail (lebar tetap), kolom kanan untuk gambar utama */
-    grid-template-columns: 80px 1fr;
-    gap: 20px;
+    flex-direction: column-reverse;
+    gap: 15px;
 }
 
-.main-image-container img {
+
+/* Container Gambar Utama */
+
+.main-image-container {
     width: 100%;
+    height: 450px;
+    overflow: hidden;
     border-radius: var(--radius);
     background: #fff;
     border: 1px solid var(--border-color);
     box-shadow: 0 6px 24px rgba(0, 0, 0, 0.06);
-    /* Grid item ini menempati kolom kedua */
-    grid-column: 2 / 3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.main-image-container img {
+    /* Pastikan gambar menyesuaikan ke dalam container tanpa terdistorsi */
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    border: none;
+    box-shadow: none;
 }
 
 
 /* Style untuk Thumbnail List */
 
 .thumbnail-list {
+    /* Thumbnail ditampilkan secara HORIZONTAL (berjajar) */
     display: flex;
-    flex-direction: column;
-    gap: 10px;
-    /* Grid item ini menempati kolom pertama */
-    grid-column: 1 / 2;
+    flex-direction: row;
+    gap: 5px;
+    overflow-x: auto;
+    /* Memungkinkan scroll jika terlalu banyak */
+    padding: 10px 0;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    justify-content: center;
 }
 
 .thumb-img {
-    width: 100%;
+    width: 80px;
+    /* Lebar thumbnail yang konsisten */
     height: 80px;
+    /* Tinggi thumbnail yang konsisten */
     object-fit: cover;
     border-radius: 8px;
     border: 2px solid transparent;
     cursor: pointer;
     opacity: 0.7;
     transition: 0.2s;
+    flex-shrink: 0;
+    /* Penting agar thumbnail tidak mengecil saat scrolling */
+}
+
+.thumbnail-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    /* Mengurangi padding horizontal dari 35px menjadi 15px */
+    padding: 0 0px;
+}
+
+.nav-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: #fff;
+    border: none;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: background 0.2s;
+    /* TAMBAHKAN ATAU MODIFIKASI INI */
+    z-index: 5;
+}
+
+
+/* Posisikan panah kiri lebih masuk ke dalam */
+
+.thumbnail-wrapper .left-arrow {
+    left: 0;
+    /* Mulai dari tepi wrapper */
+}
+
+
+/* Posisikan panah kanan lebih masuk ke dalam */
+
+.thumbnail-wrapper .right-arrow {
+    right: 0;
+    /* Mulai dari tepi wrapper */
 }
 
 .thumb-img:hover,
@@ -372,6 +485,25 @@ body {
     color: #fff;
 }
 
+.follow-btn.is-following {
+    background: var(--success);
+    /* Latar belakang hijau */
+    color: #fff;
+    /* Teks putih */
+    border: 1px solid var(--success);
+    /* Border warna yang sama */
+    cursor: default;
+    /* Ubah kursor menjadi default */
+}
+
+.follow-btn.is-following:hover {
+    background: var(--success);
+    /* Tetap hijau saat hover */
+    color: #fff;
+    opacity: 0.9;
+    /* Sedikit efek hover */
+}
+
 .add-to-cart label {
     font-weight: 600;
     color: #333;
@@ -423,6 +555,28 @@ body {
 
 .btn-add-cart:hover {
     background: var(--primary-dark);
+    transform: translateY(-2px);
+}
+
+
+/* ======== TOMBOL BELI SEKARANG (CHECKOUT) ======== */
+
+.btn-checkout {
+    display: inline-block;
+    background: #4F46E5;
+    color: #fff;
+    padding: 12px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    margin-top: 12px;
+    transition: 0.25s ease;
+    width: 100%;
+    text-align: center;
+}
+
+.btn-checkout:hover {
+    background: #4338CA;
     transform: translateY(-2px);
 }
 
