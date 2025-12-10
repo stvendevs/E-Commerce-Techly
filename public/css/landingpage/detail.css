@@ -648,7 +648,7 @@ body {
         flex-direction: row;
         grid-column: 1 / 2;
         overflow-x: auto;
-        padiing-bottom: 10px;
+        padding-bottom: 10px;
     }
     .thumb-img {
         width: 60px;
@@ -793,6 +793,7 @@ body {
 
 /* Bottom */
 
+
 .footer-bottom {
     text-align: center;
     margin-top: 25px;
@@ -801,6 +802,39 @@ body {
     font-size: 14px;
     color: #bbbbbb;
 }
+
+/* =========================================
+   BREADCRUMB
+========================================= */
+
+.breadcrumb {
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    color: #64748b;
+}
+
+.breadcrumb-item {
+    text-decoration: none;
+    color: #64748b;
+    transition: color 0.2s;
+}
+
+.breadcrumb-item:hover {
+    color: var(--primary);
+}
+
+.breadcrumb-item.active {
+    color: #1e293b;
+    font-weight: 500;
+}
+
+.breadcrumb-separator {
+    margin: 0 8px;
+    color: #cbd5e1;
+    font-size: 12px;
+}
+
 
 
 /* responsive */

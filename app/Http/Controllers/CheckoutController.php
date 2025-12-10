@@ -12,9 +12,17 @@ class CheckoutController extends Controller
     public function index(Request $request)
     {
         $productId = $request->query('product');
-        $product = Product::with('productImages')->findOrFail($productId);
+        
+        if (!$productId) {
+            // Fallback for demo: use the first product (Samsung S23 Ultra) or redirect home
+            $product = \App\Models\Product::first(); 
+        } else {
+            $product = \App\Models\Product::with('productImages')->findOrFail($productId);
+        }
 
-        return view('checkout.index', compact('product'));
+        $qty = $request->query('qty', 1);
+
+        return view('user.checkout.index', compact('product', 'qty'));
     }
 
     // Memproses form checkout
@@ -22,6 +30,7 @@ class CheckoutController extends Controller
     {
         $request->validate([
             'product_id' => 'required|exists:products,id',
+            'qty'        => 'required|integer|min:1',
             'nama'       => 'required|string|max:255',
             'telepon'    => 'required|string|max:20',
             'alamat'     => 'required|string',
@@ -32,6 +41,7 @@ class CheckoutController extends Controller
         ]);
 
         $product = Product::findOrFail($request->product_id);
+        $qty = $request->qty;
 
         $ongkir = match($request->pengiriman) {
             'reguler' => 15000,
@@ -40,29 +50,51 @@ class CheckoutController extends Controller
             default => 15000
         };
 
-        $order = Order::create([
+        $totalPrice = ($product->price * $qty) + $ongkir;
+
+        // Ensure Buyer exists
+        $user = \Illuminate\Support\Facades\Auth::user();
+        if ($user) {
+            $buyer = \App\Models\Buyer::firstOrCreate(['user_id' => $user->id]);
+            $buyerId = $buyer->id;
+        } else {
+            // Fallback for guest (assuming ID 1 exists or handle accordingly)
+            $buyerId = 1; 
+        }
+
+        $transaction = \App\Models\Transaction::create([
+            'store_id' => $product->store_id ?? 1,
+            'buyer_id' => $buyerId, 
+            'code' => 'TRX-' . time() . '-' . rand(100, 999),
+            'address' => $request->alamat,
+            'address_id' => 'ADDR-' . time(),
+            'city' => $request->kota,
+            'postal_code' => $request->kodepos,
+            'shipping' => $request->pengiriman,
+            'shipping_type' => $request->pengiriman,
+            'shipping_cost' => $ongkir,
+            'tax' => 0,
+            'grand_total' => $totalPrice,
+            'payment_status' => 'paid', // Mark as paid after successful checkout
+        ]);
+
+        // Create Transaction Detail
+        \App\Models\TransactionDetail::create([
+            'transaction_id' => $transaction->id,
             'product_id' => $product->id,
-            'nama'       => $request->nama,
-            'telepon'    => $request->telepon,
-            'alamat'     => $request->alamat,
-            'kota'       => $request->kota,
-            'kodepos'    => $request->kodepos,
-            'pengiriman' => $request->pengiriman,
-            'payment'    => $request->payment,
-            'subtotal'   => $product->price,
-            'ongkir'     => $ongkir,
-            'total'      => $product->price + $ongkir,
-            'status'     => 'pending',
+            // 'price' => $product->price, // TODO: Uncomment after adding price column to database
+            'qty' => $qty,
+            'subtotal' => $product->price * $qty,
         ]);
 
         // Redirect ke halaman sukses pembayaran
-        return redirect()->route('checkout.success', ['order' => $order->id]);
+        return redirect()->route('checkout.success', ['order' => $transaction->id]);
     }
 
     // Halaman sukses pembayaran
-    public function success($orderId)
+    public function success($transactionId)
     {
-        $order = Order::with('product')->findOrFail($orderId);
-        return view('checkout.success', compact('order'));
+        $transaction = \App\Models\Transaction::with('transactionDetails.product')->findOrFail($transactionId);
+        return view('checkout.success', compact('transaction'));
     }
 }

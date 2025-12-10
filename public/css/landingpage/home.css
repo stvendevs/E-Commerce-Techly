@@ -22,7 +22,7 @@ body {
 }
 
 .container {
-    max-width: 1200px;
+    max-width: 95%;
     margin: 0 auto;
     padding: 0 20px;
 }
@@ -44,6 +44,8 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    gap: 0; /* hapus gap default */
+    padding: 0 -100px; /* jarak dari pinggir layar */
 }
 
 .logo {
@@ -79,7 +81,7 @@ body {
 
 .nav-menu {
     display: flex;
-    gap: 40px;
+    gap: 25px;
     align-items: center;
 }
 
@@ -105,6 +107,12 @@ body {
 
 .nav-link:hover::after {
     width: 100%;
+}
+
+.nav-login,
+.nav-profile,
+.cart-link {
+    margin-left: 10px; /* jarak antar tombol kanan */
 }
 
 .cart-link {
@@ -166,7 +174,7 @@ body {
 .hero-content {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 60px;
+    gap: 50px;
     align-items: center;
     position: relative;
     z-index: 1;
@@ -193,12 +201,22 @@ body {
     line-height: 1.8;
 }
 
-.hero-buttons {
+/* Tombol Guest - Hero */
+/* Wrapper khusus guest */
+.hero-buttons-guest {
     display: flex;
+    flex-direction: column; /* tetap kolom */
     gap: 20px;
-    flex-wrap: wrap;
+    justify-content: flex-start;
 }
 
+/* Button atas (Daftar + Lihat Produk) */
+.hero-buttons-guest .top-buttons {
+    display: flex;
+    justify-content: space-evenly; /* rata kiri–kanan */
+}
+
+/* Tombol umum */
 .btn {
     padding: 15px 40px;
     border-radius: 10px;
@@ -211,9 +229,11 @@ body {
     display: inline-block;
 }
 
+/* Tombol biru */
 .btn-primary {
-    background: linear-gradient( 135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
     color: #fff;
+    border: none;
 }
 
 .btn-primary:hover {
@@ -221,6 +241,7 @@ body {
     box-shadow: 0 15px 35px rgba(6, 103, 208, 0.4);
 }
 
+/* Tombol sekunder */
 .btn-secondary {
     background: transparent;
     color: var(--secondary-color);
@@ -233,12 +254,151 @@ body {
     transform: translateY(-3px);
 }
 
+/* Tombol tengah bawah */
+.hero-buttons-guest .btn-middle {
+    text-align: center;
+    margin-top: 10px;
+    align-self: center; /* tetap center */
+}
+
+/* Tombol Button Auth - Hero */
+/* Wrapper khusus AUTH */
+.hero-buttons-auth {
+    display: flex;
+    flex-direction: row;        /* sejajar kiri–kanan */
+    justify-content: flex-start; /* posisi ke kiri */
+    gap: 20px;                  /* jarak antar tombol */
+    margin-top: 20px;
+}
+
+/* Agar tidak kena efek btn-middle dari guest */
+.hero-buttons-auth .btn-middle {
+    margin-top: 0 !important;
+    align-self: flex-start !important;
+}
+
+/* Tombol umum */
+.btn {
+    padding: 15px 40px;
+    border-radius: 10px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 15px;
+    cursor: pointer;
+    border: none;
+    transition: all 0.3s ease;
+    display: inline-block;
+}
+
+.top-buttons {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+/* Tombol biru */
+.btn-primary {
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+    color: #fff;
+    border: none;
+}
+
+.btn-primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 15px 35px rgba(6, 103, 208, 0.4);
+}
+
+/* Tombol sekunder */
+.btn-secondary {
+    background: transparent;
+    color: var(--secondary-color);
+    border: 2px solid var(--secondary-color);
+}
+
+.btn-secondary:hover {
+    background: var(--secondary-color);
+    color: var(--dark-bg);
+    transform: translateY(-3px);
+}
+
+/* Tombol tengah bawah */
+.btn-middle {
+    text-align: center;
+    margin-top: 10px; /* jarak vertikal */
+    align-self: center;
+}
+
+
 .hero-image {
     position: relative;
     height: 400px;
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+/* NAV PROFILE */
+.nav-profile {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.profile-icon {
+    width: 50px;  /* lebih besar */
+    height: 50px;
+    border-radius: 50%; /* bulat */
+    border: 2px solid #666666;
+    transition: transform 0.3s ease;
+}
+
+.profile-icon:hover {
+    transform: scale(1.05);
+}
+
+/* DROPDOWN */
+.profile-dropdown {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    right: 0;
+    top: 55px;
+    background: #fff;
+    border-radius: 10px; /* lebih bulat */
+    box-shadow: 0 8px 25px rgba(0,0,0,0.2); /* shadow lebih halus */
+    overflow: hidden;
+    min-width: 160px;
+    opacity: 0;
+    transform: translateY(-10px);
+    pointer-events: none;
+    transition: all 0.3s ease;
+    z-index: 100;
+}
+
+.nav-profile.active .profile-dropdown {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+}
+
+.profile-dropdown a,
+.profile-dropdown button {
+    display: block;
+    padding: 12px 20px;
+    text-decoration: none;;
+    color: #333;
+    font-weight: 500;
+    text-align: left;
+    background: none;
+    border: none;
+    width: 100%;
+    transition: background 0.3s, color 0.3s;
+    border-radius: 0;
+}
+
+.profile-dropdown a:hover,
+.profile-dropdown button:hover {
+    background: var(--secondary-color);
+    color: #fff;
 }
 
 .floating-card {
@@ -315,7 +475,6 @@ body {
 
 
 /* ============ PRODUCTS SECTION ============ */
-
 .product-list-section {
     padding: 40px 20px 10px;
     background: var(--light-bg);
@@ -328,81 +487,161 @@ body {
     margin-top: 40px;
 }
 
-.product-card {
-    background: #fff;
+/* CARD BARU (Mirip Product Card) */
+.bs-card {
+    display: block;
+    border: 1px solid var(--border-color);
     border-radius: 15px;
+    background: #fff;
     overflow: hidden;
     transition: all 0.3s ease;
     box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
-    border: 1px solid var(--border-color);
 }
 
-.product-card:hover {
+.bs-card:hover {
     transform: translateY(-10px);
     box-shadow: 0 20px 40px rgba(6, 103, 208, 0.15);
+    border-color: var(--primary-color);
 }
 
-.product-image {
+.bs-image {
     width: 100%;
-    height: 250px;
+    height: 300px;
     background: var(--light-bg);
     display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 80px;
+    align-items: flex-end;
+    justify-content: flex-start;
     overflow: hidden;
+    position: relative;
 }
 
-.product-content {
-    padding: 20px;
+.bs-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
 }
 
-.product-category {
+.bs-card:hover .bs-image img {
+    transform: scale(1.05);
+}
+
+/* CATEGORY OVER IMAGE */
+.bs-category {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
     display: inline-block;
-    background: linear-gradient( 135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
     color: #fff;
-    padding: 5px 12px;
+    padding: 4px 10px;
     border-radius: 20px;
-    font-size: 12px;
+    font-size: 11px;
     font-weight: 600;
-    margin-bottom: 10px;
 }
 
-.product-name {
-    font-size: 18px;
+/* CONTENT BAWAH GAMBAR */
+.bs-content {
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.bs-name {
+    font-size: 16px;
     font-weight: 600;
-    margin-bottom: 10px;
     color: var(--text-dark);
 }
 
-.product-price {
-    font-size: 20px;
+.bs-price {
+    font-size: 18px;
     font-weight: 700;
     color: var(--primary-color);
-    margin-bottom: 15px;
 }
 
-.product-rating {
-    font-size: 14px;
-    margin-bottom: 15px;
+.bs-rating {
+    font-size: 13px;
     color: #f39c12;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
-.btn-add-cart {
+.btn-detail-bs {
     width: 100%;
-    padding: 12px;
-    background: linear-gradient( 135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+    text-align: center;
+    padding: 8px 12px;
+    font-size: 14px;
+    margin-top: 5px;
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
     color: #fff;
-    border: none;
     border-radius: 8px;
-    font-weight: 600;
+    border: none;
     cursor: pointer;
+    font-weight: 600;
     transition: all 0.3s ease;
 }
 
-.btn-add-cart:hover {
+.btn-detail-bs:hover {
     transform: scale(1.02);
     box-shadow: 0 10px 25px rgba(6, 103, 208, 0.3);
+}
+
+/* Products toolbar */
+.products-toolbar {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    align-items: center;
+    margin: 20px 0 10px;
+}
+
+.input-search {
+    padding: 10px 14px;
+    border-radius: 10px;
+    border: 1px solid var(--border-color);
+    width: 380px;
+    max-width: 60%;
+    outline: none;
+    transition: box-shadow 0.2s;
+}
+
+.input-search:focus {
+    box-shadow: 0 6px 18px rgba(6, 103, 208, 0.12);
+    border-color: var(--primary-color);
+}
+
+.select-sort {
+    padding: 10px 12px;
+    border-radius: 10px;
+    border: 1px solid var(--border-color);
+    background: #fff;
+    margin-right: 10px;
+}
+
+/* Responsive adjustment for small screens */
+@media (max-width: 600px) {
+    .product-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    .bs-image {
+        height: 150px;
+    }
+    .bs-content {
+        padding: 12px;
+    }
+    .bs-name {
+        font-size: 15px;
+    }
+    .bs-price {
+        font-size: 16px;
+    }
+    .btn-detail-bs {
+        padding: 6px 10px;
+        font-size: 13px;
+    }
 }
 
 
@@ -1235,17 +1474,18 @@ body {
 
 
 /* LOGIN BUTTON - sesuaikan dengan nav-link lain */
-
 .nav-login {
-    background: linear-gradient( 135deg, var(--primary-color), var(--secondary-color));
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
     color: white !important;
     padding: 8px 16px !important;
     border-radius: 10px;
     font-weight: 600;
-    transition: all 0.18s ease;
     display: flex;
     align-items: center;
     gap: 6px;
+    text-decoration: none;
+    position: relative; /* penting untuk after underline */
+    transition: all 0.18s ease;
 }
 
 .nav-login:hover {
@@ -1253,18 +1493,27 @@ body {
     box-shadow: 0 6px 18px rgba(6, 103, 208, 0.3);
 }
 
+/* Animasi garis bawah seperti nav-link */
 .nav-login::after {
-    display: none;
-    /* hilangkan underline effect dari nav-link */
+    content: "";
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+    transition: width 0.3s ease;
+}
+
+.nav-login:hover::after {
+    width: 100%;
 }
 
 .login-icon {
     font-size: 16px;
 }
 
-
-/* responsive: ensure login button tetap rapi di mobile */
-
+/* Responsive tweak supaya tombol tetap rapi */
 @media (max-width: 768px) {
     .nav-login {
         padding: 6px 12px !important;

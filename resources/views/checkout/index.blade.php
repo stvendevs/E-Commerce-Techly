@@ -11,6 +11,7 @@
 <body>
 
     <!-- NAVBAR -->
+    <!-- NAVBAR -->
     <header class="main-header">
         <div class="container">
             <div class="header-content">
@@ -24,11 +25,10 @@
 
                     <a href="{{ route('product.detail', $product->slug) }}" class="nav-link cart-link" style="background: #00d4ff; color: white; padding: 8px 16px; border-radius: 20px; display: inline-flex; align-items: center; gap: 6px; font-weight: 600;">
                         <span class="cart-icon">🛒</span> Keranjang
-                        <span class="cart-count">({{ $qty }})</span>
+                        <span class="cart-count">(1)</span>
                     </a>
 
                     @auth
-                        <a href="{{ route('history.index') }}" class="nav-link">Riwayat</a>
                         <!-- NAV PROFILE -->
                         <div class="nav-profile" id="navProfile" style="margin-left: 15px; cursor: pointer; position: relative;">
                             <img src="{{ asset('img/user-icon.svg') }}" alt="Profile" class="profile-icon" style="width: 32px; height: 32px;" />
@@ -42,15 +42,6 @@
             </div>
         </div>
     </header>
-
-    <!-- ================= BREADCRUMB ================= -->
-    <div class="container">
-        <div class="breadcrumb">
-            <a href="{{ route('home') }}" class="breadcrumb-item">Beranda</a>
-            <span class="breadcrumb-separator">&gt;</span>
-            <span class="breadcrumb-item active">Checkout</span>
-        </div>
-    </div>
 
     <section class="checkout container">
         <h2 class="checkout-title">Checkout Pesanan</h2>

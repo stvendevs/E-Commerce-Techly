@@ -20,15 +20,26 @@
 
             <nav class="nav-menu">
                 <ul>
-                    <li><a href="{{ route('beranda') }}">Beranda</a></li>
-                    <li><a href="{{ route('kategori') }}">Kategori</a></li>
-                    <li><a href="{{ route('produk') }}">Produk</a></li>
-                    <li><a href="{{ route('keranjang') }}">Keranjang</a></li>
+                    <li><a href="{{ route('home') }}">Beranda</a></li>
+                    <li><a href="#">Kategori</a></li>
+                    <li><a href="#">Produk</a></li>
+                    <li><a href="#">Keranjang</a></li>
                 </ul>
             </nav>
         </div>
     </header>
  
+
+    <!-- ================= BREADCRUMB ================= -->
+    <div class="container" style="margin-top: 20px; margin-bottom: 20px;">
+        <div class="breadcrumb">
+            <a href="{{ route('home') }}" class="breadcrumb-item">Beranda</a>
+            <span class="breadcrumb-separator">&gt;</span>
+            <a href="#" class="breadcrumb-item">Produk</a>
+            <span class="breadcrumb-separator">&gt;</span>
+            <span class="breadcrumb-item active">{{ $product->name }}</span>
+        </div>
+    </div>
 
     <!-- ================= PRODUCT DETAIL ================= -->
     <section class="product-detail container">
@@ -36,14 +47,14 @@
         <div class="product-gallery">
             <div class="thumbnail-list">
                 <div class="thumbnail-wrapper">
-                    <img src="{{ asset('uploads/fotoip161.svg') }}" alt="Thumbnail 0" class="thumb-img" />
-                    <img src="{{ asset('uploads/fotoip162.svg') }}" alt="Thumbnail 1" class="thumb-img" />
-                    <img src="{{ asset('uploads/fotoip163.svg') }}" alt="Thumbnail 2" class="thumb-img" />
+                    @foreach($product->productImages as $key => $image)
+                        <img src="{{ asset($image->image) }}" alt="Thumbnail {{ $key }}" class="thumb-img {{ $loop->first ? 'active' : '' }}" />
+                    @endforeach
                 </div>
             </div>
             
             <div class="main-image-container">
-                <img src="{{ asset('uploads/produksatu.svg') }}" alt="gambar utama" class="produk-img">
+                <img src="{{ asset($product->productImages->first()->image ?? 'uploads/default.png') }}" alt="{{ $product->name }}" class="produk-img">
             </div>
         </div>
         
@@ -51,24 +62,22 @@
 
             <div class="store-header">
                 <span class="store-badge"></span>
-                <h3 class="store-name">EVERNEXT PHONE</h3>
+                <h3 class="store-name">{{ $product->store->name ?? 'Toko' }}</h3>
                 <button class="follow-btn" id="follow-btn">IKUTI</button>
             </div>
             <div class="store-rating">
                 <span class="rating-star">⭐⭐⭐⭐</span>
-                <span class="rating-value">4.9</span>
-                <span class="rating-count">(120)</span>
+                <span class="rating-value">{{ number_format($average_rating ?? 4.9, 1) }}</span>
+                <span class="rating-count">({{ $product->productReviews->count() }})</span>
             </div>
-            <h1 class="product-title">Iphone 16 Pro Max</h1>
-            <p class="product-category">Kategori: <strong>Smartphone</strong></p>
+            <h1 class="product-title">{{ $product->name }}</h1>
+            <p class="product-category">Kategori: <strong>{{ $product->productCategory->name ?? 'Umum' }}</strong></p>
 
             <p class="product-description">
-                iPhone 16 Pro Max mendefinisikan ulang batas performa dengan chip A18 Pro Bionic revolusioner, menghadirkan kecepatan rendering grafis yang belum pernah ada sebelumnya dan kemampuan AI terdepan di industri. 
-                Rasakan pengalaman visual yang imersif dan super mulus pada Layar ProMotion Adaptif 144Hz generasi terbaru, ditenagai oleh baterai Ultra-Tahan Lama yang siap menemani kreativitas dan produktivitas Anda sepanjang hari.
-                Dengan material Titanium Aerospace Grade yang diperkuat dan sistem kamera Quad-Lens Pro yang menghasilkan detail sinematik, iPhone 16 Pro Max bukan sekadar smartphone, melainkan ekstensi kekuatan, gaya, dan andalan mutlak Anda sehari-hari.
+                {{ $product->description }}
             </p>
 
-            <div class="product-price">Rp 21.499.000</div>
+            <div class="product-price">Rp {{ number_format($product->price, 0, ',', '.') }}</div>
 
 
 
@@ -80,14 +89,15 @@
                     <input type="number" id="quantity" value="1" min="1" style="width: 50px; text-align:center;" />
                     <button type="button" id="plus-btn">+</button>
                 </div>
-                <button class="btn-add-cart" style="margin-top: 10px;">Tambahkan ke Keranjang</button>
 
-                <a href="{{ route('checkout', $product->id) }}" class="btn-checkout">
-    Beli Sekarang
-</a>
+                <div class="button-group" style="display: flex; gap: 15px; margin-top: 25px;">
+                    <button class="btn-add-cart" style="margin-top: 0; flex: 1;">Tambahkan ke Keranjang</button>
+
+                    <a href="{{ route('checkout.index', ['product' => $product->id]) }}" class="btn-checkout" style="margin-top: 0; flex: 1; display: flex; align-items: center; justify-content: center;">
+                        Beli Sekarang
+                    </a>
+                </div>
             </div>
-
-
 
             <!-- ================= Fitur Ulasan ================= -->
             <div class="product-reviews" style="margin-top: 30px;">
@@ -110,10 +120,10 @@
         // Ubah teks tombol berdasarkan keberadaan class
         if (followBtn.classList.contains('is-following')) {
             followBtn.textContent = 'MENGIKUTI';
-            alert('Anda sekarang mengikuti toko Evernext Phone!');
+            alert('Anda sekarang mengikuti toko GadgetHub Official Store!');
         } else {
             followBtn.textContent = 'IKUTI';
-            alert('Anda berhenti mengikuti toko Evernext Phone.');
+            alert('Anda berhenti mengikuti toko GadgetHub Official Store.');
         }
     });
 }
@@ -189,6 +199,64 @@
                 thumb.classList.add('active');
                 mainImage.src = thumb.src;
             });
+        });
+    } 
+
+    // ================= Thumbnail Slider =================
+    const thumbnailList = document.querySelector('.thumbnail-list');
+    const wrapper = document.querySelector('.thumbnail-wrapper');
+    
+    // ================= Beli Sekarang Logic =================
+    const checkoutBtn = document.querySelector('.btn-checkout');
+    // Re-select quantity input to be safe
+    const qtyInputForCheckout = document.getElementById('quantity');
+
+    if (checkoutBtn && qtyInputForCheckout) {
+        checkoutBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            const qty = qtyInputForCheckout.value;
+            
+            // Construct URL safely
+            try {
+                const url = new URL(checkoutBtn.href, window.location.origin);
+                url.searchParams.set('qty', qty);
+                // DEBUG: Alert is now ACTIVE
+                alert("Redirecting to checkout with quantity: " + qty); 
+                window.location.href = url.toString();
+            } catch (err) {
+                console.error("Error constructing checkout URL:", err);
+                // Fallback if URL construction fails
+                window.location.href = checkoutBtn.href + '&qty=' + qty;
+            }
+        });
+    }
+    
+    if (thumbnailList) {
+        // Simple scroll implementation
+        let isDown = false;
+        let startX;
+        let scrollLeft;
+
+        thumbnailList.addEventListener('mousedown', (e) => {
+            isDown = true;
+            thumbnailList.classList.add('active');
+            startX = e.pageX - thumbnailList.offsetLeft;
+            scrollLeft = thumbnailList.scrollLeft;
+        });
+        thumbnailList.addEventListener('mouseleave', () => {
+            isDown = false;
+            thumbnailList.classList.remove('active');
+        });
+        thumbnailList.addEventListener('mouseup', () => {
+            isDown = false;
+            thumbnailList.classList.remove('active');
+        });
+        thumbnailList.addEventListener('mousemove', (e) => {
+            if (!isDown) return;
+            e.preventDefault();
+            const x = e.pageX - thumbnailList.offsetLeft;
+            const walk = (x - startX) * 3; // scroll-fast
+            thumbnailList.scrollLeft = scrollLeft - walk;
         });
     } 
     </script>

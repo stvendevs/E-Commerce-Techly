@@ -85,21 +85,39 @@
     display: block;
     width: 100%;
     padding: 14px 0;
-    background: #111;
+
+    /* GRADIENT ala Dashboard */
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
     color: white;
+
     font-weight: 700;
-    border-radius: 50px; /* tombol lebih modern */
+    border-radius: 50px;
     border: none;
     text-align: center;
     font-size: 16px;
     cursor: pointer;
-    transition: 0.2s;
+
+    /* animasi smooth */
+    transition: all 0.3s ease;
     margin-top: 12px;
+
+    /* sedikit shadow */
+    box-shadow: 0 4px 14px rgba(6, 103, 208, 0.2);
 }
 
+/* Hover — sedikit glowing dan naik */
 .btn-submit:hover {
-    background: #007bff;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 22px rgba(6, 103, 208, 0.35);
+    opacity: 0.95;
 }
+
+/* Klik — efek “press” */
+.btn-submit:active {
+    transform: translateY(0);
+    box-shadow: 0 3px 10px rgba(6, 103, 208, 0.25);
+}
+
 
 /* Responsive */
 @media (max-width: 700px) {

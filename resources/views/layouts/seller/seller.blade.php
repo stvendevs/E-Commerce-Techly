@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,56 +12,127 @@
     {{-- CSS Halaman --}}
     @yield('head')
 </head>
+
 <body>
-    {{-- Navbar --}}
-    <nav class="seller-navbar">
-
-        <div class="nav-left">
-            <a href="#" class="nav-logo">
-                <img src="{{ asset('img/logo-techly.png') }}" class="logo-img" alt="Techly Logo">
+    <ul class="nav-links">
+        {{-- Pendaftaran Toko --}}
+        <li>
+            <a href="{{ route('seller.store.register') }}"
+                class="nav-link {{ request()->routeIs('seller.store.register') ? 'active' : '' }}">
+                Pendaftaran Toko
             </a>
-        </div>
+        </li>
 
-        <ul class="nav-links">
-            <li><a href="#" class="nav-link">Pendaftaran Toko</a></li>
-            <li><a href="#" class="nav-link">Pesanan</a></li>
-            <li><a href="#" class="nav-link">Saldo Toko</a></li>
-            <li><a href="#" class="nav-link">Penarikan Saldo</a></li>
-            <li><a href="#" class="nav-link">Manajemen Toko</a></li>
-        </ul>
+        {{-- Pesanan --}}
+        {{--
+    <li>
+        <a href="{{ route('seller.orders.index') }}"
+            class="nav-link {{ request()->routeIs('seller.orders.*') ? 'active' : '' }}">
+            Pesanan
+        </a>
+    </li>
+    --}}
 
-        <div class="nav-right">
-            <div class="nav-search">
-                <input type="text" placeholder="Cari produk...">
-                 <img src="{{ asset('img/search-icon.svg') }}" class="search-icon">
-                <i class="fa fa-search"></i>
-            </div>
-        </div>
-    </nav>
+        {{-- Saldo Toko --}}
+        {{--
+    <li>
+        <a href="{{ route('seller.balance.index') }}"
+            class="nav-link {{ request()->routeIs('seller.balance.*') ? 'active' : '' }}">
+            Saldo Toko
+        </a>
+    </li>
+    --}}
+
+        {{-- Penarikan Saldo --}}
+        {{--
+    <li>
+        <a href="{{ route('seller.withdraw.index') }}"
+            class="nav-link {{ request()->routeIs('seller.withdraw.*') ? 'active' : '' }}">
+            Penarikan Saldo
+        </a>
+    </li>
+    --}}
+
+        {{-- Manajemen Toko --}}
+        {{--
+    <li>
+        <a href="{{ route('seller.manage.index') }}"
+            class="nav-link {{ request()->routeIs('seller.manage.*') ? 'active' : '' }}">
+            Manajemen Toko
+        </a>
+    </li>
+    --}}
+    </ul>
+
     {{-- Konten Halaman --}}
     <main class="seller-content">
         @yield('content')
     </main>
-
-    {{-- Footer --}}
     <footer class="footer">
-        <div class="foot-inner">
-            <div style="min-width:200px">
-                <div style="font-weight:800;font-family:'Montserrat',sans-serif">TECHLY</div>
-                <div class="muted-small">Kembangkan toko Anda dengan mudah dan cepat di platform kami.</div>
+        <div class="footer-container">
+            <!-- BRAND -->
+            <div class="footer-col">
+                <img src="{{ asset('uploads/logotbg.svg') }}" class="footer-logo" alt="Techly">
+                <p class="footer-desc">
+                    Techly — Gadget & Elektronik terpercaya. Pengiriman cepat dan bergaransi.
+                </p>
+
+                <div class="footer-social">
+                    <a href="#"><img src="{{ asset('uploads/logofb.svg') }}" class="social-icon-img"
+                            alt="Facebook"></a>
+                    <a href="#"><img src="{{ asset('uploads/logoig.svg') }}" class="social-icon-img"
+                            alt="Instagram"></a>
+                    <a href="#"><img src="{{ asset('uploads/logowa.svg') }}" class="social-icon-img"
+                            alt="Whatsapp"></a>
+                    <a href="#"><img src="{{ asset('uploads/logolinkedin.svg') }}" class="social-icon-img"
+                            alt="LinkedIn"></a>
+                </div>
             </div>
 
-            <div style="display:flex;gap:24px;flex-wrap:wrap">
-                <div>
-                    <div style="font-weight:700;margin-bottom:8px">Company</div>
-                    <div class="muted-small">About<br>Careers<br>Contact</div>
-                </div>
-                <div>
-                    <div style="font-weight:700;margin-bottom:8px">Help</div>
-                    <div class="muted-small">Customer Support<br>Delivery Details<br>Terms</div>
-                </div>
+            <!-- NAVIGASI -->
+            <div class="footer-col">
+                <h4>Navigasi</h4>
+                <ul>
+                    <li><a href="#">Tentang Kami</a></li>
+                    <li><a href="#">FAQ</a></li>
+                </ul>
             </div>
+
+            <!-- KEBIJAKAN -->
+            <div class="footer-col">
+                <h4>Kebijakan</h4>
+                <ul>
+                    <li><a href="#">Kebijakan Privasi</a></li>
+                    <li><a href="#">Syarat & Ketentuan</a></li>
+                    <li><a href="#">Keamanan Pengguna</a></li>
+                </ul>
+            </div>
+
+            <!-- KONTAK -->
+            <div class="footer-col">
+                <h4>Kontak</h4>
+                <p>Email: <a href="mailto:admintechly@techly.id">admintechly@techly.id</a></p>
+                <p>Telp: +62 812-3456-7890</p>
+                <p>Alamat: Malang, Jawa Timur</p>
+            </div>
+
+            <!-- NEWSLETTER -->
+            <div class="footer-col">
+                <h4>Newsletter</h4>
+                <p>Dapatkan promo & update terbaru.</p>
+
+                <form class="newsletter-form">
+                    <input type="email" placeholder="Email kamu..." required>
+                    <button type="submit">Daftar</button>
+                </form>
+            </div>
+
+        </div>
+
+        <div class="footer-bottom">
+            © 2025 Techly. Semua hak dilindungi.
         </div>
     </footer>
 </body>
+
 </html>

@@ -1,73 +1,46 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
+
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Seller\SellerStoreController;
 use App\Http\Controllers\Seller\SellerDashboardController;
-use App\Http\Controllers\Seller\CheckoutController;
-use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('user.index');
-});
+use App\Http\Controllers\Product\ProductController; // pastikan sesuai folder
+use App\Http\Controllers\User\HomepageController;
+use App\Http\Controllers\CheckoutController;
+use App\Http\Controllers\User\HistoryController;
 
-Route::get('/detail', function () {
-    return view('user.detail');
-});
+// HOMEPAGE
+Route::get('/', [HomepageController::class, 'indexGuest'])->name('home');
+Route::get('/dashboard', [HomepageController::class, 'indexAuth'])->middleware(['auth', 'verified'])->name('dashboard');
 
-//lihat detail produk
-Route::get('/detail', function () {
-    return view('user.detail');
-})->name('detail');
+// DETAIL PRODUK (HANYA PAKAI SLUG)
+Route::get('/produk/{slug}', [ProductController::class, 'detail'])->name('product.detail');
 
-//beranda
-Route::get('/', function () {
-    return view('user.index');
-})->name('beranda');
-
-// Kategori
-Route::get('/kategori', function () {
-    return view('user.index');
-})->name('kategori');
-
-// Produk
-Route::get('/produk', function () {
-    return view('user.index');
-})->name('produk');
-
-// Keranjang
-Route::get('/keranjang', function () {
-    return view('user.index');
-})->name('keranjang');
-
-// Checkout (gunakan Controller)
+// CHECKOUT
 Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout.index');
 Route::post('/checkout/process', [CheckoutController::class, 'process'])->name('checkout.process');
 Route::get('/checkout/success/{order}', [CheckoutController::class, 'success'])->name('checkout.success');
 
+// KATEGORI
+Route::get('/category/{slug}', [HomepageController::class, 'getByCategory'])->name('category.products');
+Route::get('/api/all-products', [HomepageController::class, 'allProducts'])->name('api.all-products');
 
+// PROFILE
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::get('/history', [HistoryController::class, 'index'])->name('history.index');
 });
 
-Route::middleware(['auth'])
-->prefix('seller')
-->name('seller.')
-->group(function () {
+// SELLER
+Route::middleware(['auth'])->prefix('seller')->name('seller.')->group(function () {
 
-    // Dashboard Seller
-    Route::get('/dashboard', [SellerDashboardController::class, 'index'])
-        ->name('dashboard');
-
-    // Registrasi Toko
-    Route::get('/register-store', [SellerStoreController::class, 'create'])
-        ->name('store.create');
-
-    Route::post('/register-store', [SellerStoreController::class, 'store'])
-        ->name('store.store');
-    
-  
+    Route::get('/dashboard', [SellerDashboardController::class, 'index'])->name('dashboard');
+    Route::get('/register-store', [SellerStoreController::class, 'create'])->name('store.create');
+    Route::post('/register-store', [SellerStoreController::class, 'store'])->name('store.store');
 
 });
 
