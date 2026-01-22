@@ -137,9 +137,3 @@ MAIL_ENCRYPTION=tls
 ## 📄 License
 
 Project ini dibuat untuk keperluan pembelajaran dan portfolio.
-
----
-
-<p align="center">
-  <b>Made with ❤️ by Steven</b>
-</p>
