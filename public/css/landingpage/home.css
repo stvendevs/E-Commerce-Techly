@@ -1,3 +1,6 @@
+/* Import Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@600;700;800&family=DM+Sans:wght@400;500;600;700&display=swap');
+
 * {
     margin: 0;
     padding: 0;
@@ -5,6 +8,12 @@
 }
 
 :root {
+    /* Font Families */
+    --font-heading: 'Outfit', sans-serif;
+    --font-body: 'Inter', sans-serif;
+    --font-ui: 'DM Sans', sans-serif;
+    
+    /* Colors */
     --primary-color: #0667d0;
     --secondary-color: #00d4ff;
     --dark-bg: #0a0e27;
@@ -15,7 +24,7 @@
 }
 
 body {
-    font-family: "Poppins", sans-serif;
+    font-family: var(--font-body);
     background: #fff;
     color: var(--text-dark);
     line-height: 1.6;
@@ -55,6 +64,7 @@ body {
     text-decoration: none;
     font-size: 24px;
     font-weight: 700;
+    font-family: var(--font-heading);
 }
 
 .logo-icon {
@@ -90,6 +100,7 @@ body {
     color: var(--text-dark);
     font-weight: 500;
     font-size: 15px;
+    font-family: var(--font-ui);
     transition: all 0.3s ease;
     position: relative;
 }
@@ -182,7 +193,8 @@ body {
 
 .hero-text h1 {
     font-size: 52px;
-    font-weight: 700;
+    font-weight: 800;
+    font-family: var(--font-heading);
     margin-bottom: 20px;
     line-height: 1.2;
 }
@@ -284,6 +296,7 @@ body {
     text-decoration: none;
     font-weight: 600;
     font-size: 15px;
+    font-family: var(--font-ui);
     cursor: pointer;
     border: none;
     transition: all 0.3s ease;
@@ -464,6 +477,7 @@ body {
 .section-header h2 {
     font-size: 42px;
     font-weight: 700;
+    font-family: var(--font-heading);
     margin-bottom: 15px;
     color: var(--text-dark);
 }
@@ -551,12 +565,14 @@ body {
 .bs-name {
     font-size: 16px;
     font-weight: 600;
+    font-family: var(--font-ui);
     color: var(--text-dark);
 }
 
 .bs-price {
     font-size: 18px;
     font-weight: 700;
+    font-family: var(--font-heading);
     color: var(--primary-color);
 }
 
@@ -692,6 +708,7 @@ body {
 .best-seller-container h3 {
     font-size: 26px;
     font-weight: 700;
+    font-family: var(--font-heading);
     color: var(--text-dark);
     margin-bottom: 25px;
     text-align: center;
@@ -770,6 +787,7 @@ body {
 .bs-name {
     font-size: 16px;
     font-weight: 600;
+    font-family: var(--font-ui);
     color: var(--text-dark);
     margin-bottom: 6px;
 }
@@ -777,6 +795,7 @@ body {
 .bs-price {
     font-size: 18px;
     font-weight: 700;
+    font-family: var(--font-heading);
     color: var(--primary-color);
     margin-bottom: 6px;
 }

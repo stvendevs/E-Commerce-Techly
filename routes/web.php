@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Seller\SellerStoreController;
 use App\Http\Controllers\Seller\SellerDashboardController;
+use App\Http\Controllers\Seller\SellerProductController;
 
 use App\Http\Controllers\Product\ProductController; // pastikan sesuai folder
 use App\Http\Controllers\User\HomepageController;
@@ -41,6 +42,9 @@ Route::middleware(['auth'])->prefix('seller')->name('seller.')->group(function (
     Route::get('/dashboard', [SellerDashboardController::class, 'index'])->name('dashboard');
     Route::get('/register-store', [SellerStoreController::class, 'create'])->name('store.create');
     Route::post('/register-store', [SellerStoreController::class, 'store'])->name('store.store');
+
+    // Products
+    Route::resource('products', SellerProductController::class);
 
 });
 

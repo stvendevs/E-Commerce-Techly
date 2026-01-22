@@ -202,8 +202,8 @@
 
         pengiriman.addEventListener("change", () => {
             const cost = parseInt(pengiriman.selectedOptions[0].dataset.cost);
-            ongkirText.textContent = "Rp " + cost.toLocaleString();
-            totalText.textContent = "Rp " + (subtotal + cost).toLocaleString();
+            ongkirText.textContent = "Rp " + cost.toLocaleString('id-ID');
+            totalText.textContent = "Rp " + (subtotal + cost).toLocaleString('id-ID');
         });
     </script>
 

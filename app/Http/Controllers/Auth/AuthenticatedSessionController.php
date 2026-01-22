@@ -28,7 +28,29 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-        return redirect()->intended(route('dashboard', absolute: false));
+        // Get account type from request (buyer or seller)
+        $accountType = $request->input('account_type', 'buyer');
+
+        // Store in session for tracking
+        $request->session()->put('login_as', $accountType);
+
+        // Handle redirect based on account type
+        if ($accountType === 'seller') {
+            // Check if user has a store
+            $store = Auth::user()->store;
+            
+            if ($store) {
+                // Redirect to seller dashboard if store exists
+                return redirect()->route('seller.dashboard');
+            } else {
+                // Redirect to store registration if no store
+                return redirect()->route('seller.store.create')
+                    ->with('info', 'Silakan daftarkan toko Anda terlebih dahulu untuk mulai berjualan.');
+            }
+        }
+
+        // Default: redirect buyer to homepage
+        return redirect()->route('home');
     }
 
     /**

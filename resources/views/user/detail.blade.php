@@ -83,19 +83,21 @@
 
             <!-- ================= Add to Cart dengan quantity ================= -->
             <div class="add-to-cart" style="margin: 20px 0;">
-                <label for="quantity">Jumlah:</label>
-                <div style="display: flex; align-items: center; gap: 10px; margin-top: 5px;">
-                    <button type="button" id="minus-btn">-</button>
-                    <input type="number" id="quantity" value="1" min="1" style="width: 50px; text-align:center;" />
-                    <button type="button" id="plus-btn">+</button>
+                <label for="quantity" style="font-size: 14px; font-weight: 600; color: #333;">Jumlah:</label>
+                <div style="display: flex; align-items: center; gap: 10px; margin-top: 8px;">
+                    <button type="button" id="minus-btn" style="width: 40px; height: 40px; font-size: 18px; font-weight: 600;">-</button>
+                    <input type="number" id="quantity" value="1" min="1" style="width: 60px; height: 40px; text-align:center; font-size: 16px; font-weight: 600;" />
+                    <button type="button" id="plus-btn" style="width: 40px; height: 40px; font-size: 18px; font-weight: 600;">+</button>
                 </div>
 
-                <div class="button-group" style="display: flex; gap: 15px; margin-top: 25px;">
-                    <button class="btn-add-cart" style="margin-top: 0; flex: 1;">Tambahkan ke Keranjang</button>
+                <div class="button-group" style="display: flex; gap: 12px; margin-top: 25px; width: 100%;">
+                    <button class="btn-add-cart" style="margin-top: 0; flex: 1; min-height: 50px;">
+                        Tambahkan ke Keranjang
+                    </button>
 
-                    <a href="{{ route('checkout.index', ['product' => $product->id]) }}" class="btn-checkout" style="margin-top: 0; flex: 1; display: flex; align-items: center; justify-content: center;">
+                    <button type="button" onclick="goToCheckout()" class="btn-checkout" style="margin-top: 0; flex: 1; min-height: 50px;">
                         Beli Sekarang
-                    </a>
+                    </button>
                 </div>
             </div>
 
@@ -142,6 +144,13 @@
             }
         });
 
+        // Update summary when user manually types quantity
+        quantityInput.addEventListener('input', () => {
+            if (parseInt(quantityInput.value) < 1) {
+                quantityInput.value = 1;
+            }
+        });
+
         document.querySelector('.btn-add-cart').addEventListener('click', () => {
             alert(`Berhasil menambahkan ${quantityInput.value} produk ke keranjang!`);
         });
@@ -166,28 +175,6 @@
             reviewInput.value = '';
         });
         
-        const thumbnaillist = document.querySelector('.thumbnail-list');
-        const leftArrow = document.querySelector('.left-arrow');
-        const rightArrow = document.querySelector('.right-arrow');
-        const scrollAmount = 100;
-
-        if (thumbnailList && rightArrow && leftArrow) {
-        rightArrow.addEventListener('click', () => {
-            thumbnailList.scrollBy({
-                left: scrollAmount,
-                behavior: 'smooth'
-            });
-        });
-
-        leftArrow.addEventListener('click', () => {
-            thumbnailList.scrollBy({
-                left: -scrollAmount,
-                behavior: 'smooth'
-            });
-        });
-    }
-
-
     // ================= Main Image Switching =================
     const mainImage = document.querySelector('.produk-img');
     const thumbnails = document.querySelectorAll('.thumb-img');
@@ -207,28 +194,15 @@
     const wrapper = document.querySelector('.thumbnail-wrapper');
     
     // ================= Beli Sekarang Logic =================
-    const checkoutBtn = document.querySelector('.btn-checkout');
-    // Re-select quantity input to be safe
-    const qtyInputForCheckout = document.getElementById('quantity');
-
-    if (checkoutBtn && qtyInputForCheckout) {
-        checkoutBtn.addEventListener('click', (e) => {
-            e.preventDefault();
-            const qty = qtyInputForCheckout.value;
-            
-            // Construct URL safely
-            try {
-                const url = new URL(checkoutBtn.href, window.location.origin);
-                url.searchParams.set('qty', qty);
-                // DEBUG: Alert is now ACTIVE
-                alert("Redirecting to checkout with quantity: " + qty); 
-                window.location.href = url.toString();
-            } catch (err) {
-                console.error("Error constructing checkout URL:", err);
-                // Fallback if URL construction fails
-                window.location.href = checkoutBtn.href + '&qty=' + qty;
-            }
-        });
+    function goToCheckout() {
+        const qty = parseInt(document.getElementById('quantity').value) || 1;
+        const productId = {{ $product->id }};
+        const checkoutUrl = '/checkout?product=' + productId + '&qty=' + qty;
+        
+        console.log('Going to checkout with qty:', qty);
+        console.log('URL:', checkoutUrl);
+        
+        window.location.href = checkoutUrl;
     }
     
     if (thumbnailList) {

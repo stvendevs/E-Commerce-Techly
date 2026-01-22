@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\Auth\OtpVerificationController;
 use App\Models\User;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
@@ -45,6 +46,18 @@ class RegisteredUserController extends Controller
 
         Auth::login($user);
 
-        return redirect(route('dashboard', absolute: false));
+        // Get account type from request
+        $accountType = $request->input('account_type', 'buyer');
+        
+        // Store in session
+        $request->session()->put('registered_as', $accountType);
+
+        // Send OTP email
+        OtpVerificationController::sendOtp($user);
+
+        // Redirect to OTP verification page
+        return redirect()->route('otp.notice')
+            ->with('status', 'Kode OTP telah dikirim ke email Anda.');
     }
 }
+

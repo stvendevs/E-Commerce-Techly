@@ -50,7 +50,7 @@
                     </p>
                     <div class="hero-buttons hero-buttons-guest">
                         <div class="top-buttons">
-                            <a href="{{ route('register') }}" class="btn btn-primary">📝 Daftar Sekarang</a>
+                            <a href="{{ route('register') }}" class="btn btn-primary">Daftar Sekarang</a>
                             <a href="#products" class="btn btn-primary">Lihat Produk</a>
                         </div>
                         <a href="#categories" class="btn btn-secondary btn-middle">Jelajahi Kategori</a>
@@ -114,9 +114,9 @@
                     </p>
                     <div class="hero-buttons hero-buttons-auth">
                         <div class="top-buttons">
-                            <a href="#products" class="btn btn-primary">🔍 Lihat Produk</a>
+                            <a href="#products" class="btn btn-primary">Lihat Produk</a>
                         </div>
-                        <a href="#categories" class="btn btn-secondary btn-middle">📂 Jelajahi Kategori</a>
+                        <a href="#categories" class="btn btn-secondary btn-middle">Jelajahi Kategori</a>
                     </div>
                 </div>
                 <div class="hero-image">

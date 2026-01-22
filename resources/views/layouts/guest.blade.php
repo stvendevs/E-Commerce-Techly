@@ -29,24 +29,22 @@
         }
 
         .left {
-            flex: 0 0 30%;
+            flex: 0 0 40%;
             background-color: #ffffff;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            padding: 2rem;
+            padding: 3rem 2.5rem;
         }
 
         .right {
-            flex: 0 0 70%;
-            background-color: #0667d0; /* warna biru tetap! */
-
+            flex: 0 0 60%;
+            background-color: #0667d0;
             background-image: url('{{ asset('img/login-gadget.svg') }}');
             background-repeat: no-repeat;
-            background-position: center center; /* biar di tengah */
-            background-size: 80%; /* PERKECIL gambar — bisa disesuaikan 40–60% */
-
+            background-position: center center;
+            background-size: 75%;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -56,50 +54,75 @@
         }
 
         .logo-container {
-            margin-bottom: 1rem;
+            margin-bottom: 2rem;
             text-align: center;
         }
 
         .form-container {
             width: 100%;
-            max-width: 400px;
+            max-width: 500px;
             background: white;
-            padding: 2rem;
-            border-radius: 1rem;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            padding: 2.5rem;
+            border-radius: 1.25rem;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1), 0 5px 15px rgba(0, 0, 0, 0.07);
+            border: 1px solid rgba(0, 0, 0, 0.05);
         }
 
         .form-title {
             text-align: center;
-            font-size: 1.5rem;
-            font-weight: 600;
-            margin-bottom: 1.5rem;
+            font-size: 1.875rem;
+            font-weight: 700;
+            margin-bottom: 2rem;
+            color: #1f2937;
+            font-family: 'Outfit', sans-serif;
+            letter-spacing: -0.025em;
         }
 
         .form-container input[type="text"],
         .form-container input[type="email"],
         .form-container input[type="password"] {
-            border-radius: 0.5rem;
-            border: 1px solid #ccc;
-            padding: 0.75rem 1rem;
+            border-radius: 0.625rem;
+            border: 1.5px solid #d1d5db;
+            padding: 0.875rem 1.125rem;
             width: 100%;
             margin-bottom: 1rem;
+            font-size: 15px;
+            transition: all 0.2s ease;
         }
 
+        .form-container input[type="text"]:focus,
+        .form-container input[type="email"]:focus,
+        .form-container input[type="password"]:focus {
+            outline: none;
+            border-color: #0667d0;
+            box-shadow: 0 0 0 3px rgba(6, 103, 208, 0.1);
+        }
 
         .form-container button {
             background-color: #0667d0;
             color: white;
-            padding: 0.75rem;
+            padding: 0.875rem;
             width: 100%;
-            border-radius: 0.5rem;
+            border-radius: 0.625rem;
             font-weight: 600;
+            font-size: 15px;
             margin-top: 0.5rem;
             cursor: pointer;
-            transition: background 0.3s ease;
+            transition: all 0.2s ease;
+            border: none;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
         }
 
-        /* Fix checkbox alignment */
+        .form-container button:hover {
+            background-color: #0554a3;
+            box-shadow: 0 4px 6px rgba(6, 103, 208, 0.2);
+            transform: translateY(-1px);
+        }
+
+        .form-container button:active {
+            transform: translateY(0);
+        }
+
         #remember_me {
             width: 16px !important;
             height: 16px !important;
@@ -109,20 +132,23 @@
         label[for="remember_me"] {
             display: flex;
             align-items: center;
-            gap: 6px;
+            gap: 8px;
         }
 
         label[for="remember_me"] span {
             line-height: 1;
-            margin-top: 2px;
-        }
-
-        .form-container button:hover {
-            background-color: #0554a3;
+            margin-top: 1px;
         }
 
         .form-container a {
             color: #0667d0;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s ease;
+        }
+
+        .form-container a:hover {
+            color: #0554a3;
             text-decoration: underline;
         }
     </style>
@@ -148,7 +174,6 @@
 
         <!-- Kanan: Placeholder Gambar / Ilustrasi -->
         <div class="right">
-
         </div>
     </div>
 </body>
