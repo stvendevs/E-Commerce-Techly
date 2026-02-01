@@ -59,8 +59,14 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->role === 'member';
     }
 
-    // Cek apakah user adalah seller (punya store yang verified)
+    // Cek apakah user adalah seller
     public function isSeller()
+    {
+        return $this->role === 'seller' || ($this->store()->exists() && $this->store->is_verified);
+    }
+
+    // Cek apakah store sudah verified
+    public function hasVerifiedStore()
     {
         return $this->store()->exists() && $this->store->is_verified;
     }

@@ -11,11 +11,27 @@ class SellerStoreController extends Controller
 {
     public function create()
     {
+        // Check if user already has a store
+        $existingStore = Store::where('user_id', Auth::id())->first();
+        
+        if ($existingStore) {
+            return redirect()->route('seller.dashboard')
+                ->with('info', 'Anda sudah memiliki toko.');
+        }
+        
         return view('seller.register.register-store');
     }
 
     public function store(Request $request)
     {
+        // Check if user already has a store
+        $existingStore = Store::where('user_id', Auth::id())->first();
+        
+        if ($existingStore) {
+            return redirect()->route('seller.dashboard')
+                ->with('info', 'Anda sudah memiliki toko.');
+        }
+
         $request->validate([
             'name' => 'required|string|max:255|unique:stores,name',
             'about' => 'required|string|min:50',

@@ -10,13 +10,13 @@ class TransactionDetail extends Model
     protected $fillable = [
         'transaction_id',
         'product_id',
-        // 'price', // TODO: Uncomment after adding price column to database
+        'price',
         'qty',
         'subtotal',
     ];
 
     protected $casts = [
-        // 'price' => 'decimal:2', // TODO: Uncomment after adding price column to database
+        'price' => 'decimal:2',
         'subtotal' => 'decimal:2',
     ];
 

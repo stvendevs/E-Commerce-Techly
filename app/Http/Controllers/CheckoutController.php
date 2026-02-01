@@ -82,7 +82,7 @@ class CheckoutController extends Controller
         \App\Models\TransactionDetail::create([
             'transaction_id' => $transaction->id,
             'product_id' => $product->id,
-            // 'price' => $product->price, // TODO: Uncomment after adding price column to database
+            'price' => $product->price,
             'qty' => $qty,
             'subtotal' => $product->price * $qty,
         ]);

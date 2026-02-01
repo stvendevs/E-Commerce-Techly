@@ -71,7 +71,7 @@ test('correct password must be provided to delete account', function () {
     $user = User::factory()->create();
 
     $response = $this
-        ->actingAs($user)
+        ->actingAs($user) 
         ->from('/profile')
         ->delete('/profile', [
             'password' => 'wrong-password',

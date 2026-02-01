@@ -23,7 +23,11 @@ class OtpVerificationController extends Controller
 
         // If already verified, redirect to appropriate page
         if ($user->hasVerifiedEmail()) {
-            return redirect()->route('dashboard');
+            // Redirect based on role
+            if ($user->role === 'seller') {
+                return redirect()->route('seller.dashboard');
+            }
+            return redirect()->route('home');
         }
 
         return view('auth.verify-otp', [
@@ -60,11 +64,11 @@ class OtpVerificationController extends Controller
 
         // Handle redirect based on account type
         if ($accountType === 'seller') {
-            return redirect()->route('seller.store.create')
-                ->with('success', 'Email berhasil diverifikasi! Silakan daftarkan toko Anda.');
+            return redirect()->route('seller.dashboard')
+                ->with('success', 'Email berhasil diverifikasi! Selamat datang di Seller Dashboard.');
         }
 
-        return redirect()->route('dashboard')
+        return redirect()->route('home')
             ->with('success', 'Email berhasil diverifikasi! Selamat berbelanja di Techly.');
     }
 
@@ -76,7 +80,10 @@ class OtpVerificationController extends Controller
         $user = Auth::user();
 
         if ($user->hasVerifiedEmail()) {
-            return redirect()->route('dashboard');
+            if ($user->role === 'seller') {
+                return redirect()->route('seller.dashboard');
+            }
+            return redirect()->route('home');
         }
 
         // Generate new OTP

@@ -142,6 +142,33 @@ body {
     box-shadow: 0 10px 25px rgba(6, 103, 208, 0.3);
 }
 
+/* NAV LOGIN BUTTON - Matching cart-link style */
+.nav-login {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: #fff;
+    color: var(--primary-color) !important;
+    padding: 8px 20px;
+    border-radius: 8px;
+    border: 2px solid var(--primary-color);
+    font-weight: 600;
+    font-size: 14px;
+    transition: all 0.3s ease;
+}
+
+.nav-login:hover {
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+    color: #fff !important;
+    border-color: transparent;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(6, 103, 208, 0.3);
+}
+
+.nav-login::after {
+    display: none; /* Remove underline effect from nav-link */
+}
+
 .cart-icon {
     font-size: 18px;
 }
